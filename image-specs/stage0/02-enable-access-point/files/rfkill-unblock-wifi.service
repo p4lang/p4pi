@@ -1,0 +1,11 @@
+[Unit]
+Description=RFKill-Unblock WiFi Devices
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/rfkill unblock wifi
+ExecStop=
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

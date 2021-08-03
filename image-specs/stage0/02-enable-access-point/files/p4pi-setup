@@ -1,0 +1,25 @@
+#!/bin/bash
+
+brctl addbr br0
+brctl addbr br1
+
+brctl setageing br0 0
+brctl setageing br1 0
+
+ip link add dev veth0 type veth peer name veth0-1
+ip link add dev veth1 type veth peer name veth1-1
+
+ip link set dev veth0 up
+ip link set dev veth1 up
+
+ip link set dev veth0-1 up
+ip link set dev veth1-1 up
+
+ethtool -K veth0 tx off
+ethtool -K veth1 tx off
+
+ethtool -K veth0-1 tx off
+ethtool -K veth1-1 tx off
+
+brctl addif br0 veth0-1
+brctl addif br1 veth1-1

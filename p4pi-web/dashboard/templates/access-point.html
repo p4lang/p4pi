@@ -1,0 +1,81 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Wireless Access Point {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Wireless Access Point</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Wireless Access Point</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Wireless Access Point</h5>
+                                </div>
+
+                                <div class="card-body">
+
+                                    {% if errors %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% for error in errors %}
+                                                <p class="text-danger mb-1">
+                                                    {{ error }}
+                                                </p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <br />
+                                    {% endif %}
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form method="post" action="{% url 'access_point_settings' %}">
+                                                {% csrf_token %}
+                                                {% for field in form %}
+                                                    <div class="form-group">
+                                                        <label for="{{ field.name }}">{{ field.label }}</label>
+                                                        {{ field }}
+                                                    </div>
+                                                {% endfor %}
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
