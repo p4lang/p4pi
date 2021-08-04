@@ -1,19 +1,139 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Dashboard {% endblock %}
+{% block title %} P4 Compiler {% endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+<link rel="stylesheet" href="/static/assets/css/codemirror/codemirror.css">
+<link rel="stylesheet" href="/static/assets/css/codemirror/simplescrollbars.css">
+<link rel="stylesheet" href="/static/assets/css/codemirror/dialog.css">
+<link rel="stylesheet" href="/static/assets/css/codemirror/placeholder.css">
+
+{% endblock stylesheets %}
 
 {% block content %}
 
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
 
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">P4 Compiler</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">P4 Compiler</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="main-body">
                 <div class="page-wrapper">
                     <!-- [ Main Content ] start -->
                     <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Compile P4 Program</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h5>P4 Program</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form>
+                                                <div class="form-group required">
+                                                    <label class="control-label">Name</label>
+                                                    <input type="text" class="form-control" id="name" placeholder="switch" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="compiler">Compiler</label>
+                                                    <select class="form-control" id="compiler">
+                                                        <option>T4P4S</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="p4-code">P4 Code</label>
+                                                    <span
+                                                        data-toggle="tooltip"
+                                                        data-html="true"
+                                                        title="
+                                                        <u>Keyboard Shortcuts</u>
+                                                        <div style='text-align: left'>
+                                                            <b>Ctrl-S</b>&nbsp&nbsp<em>Save</em> <br />
+                                                            <b>Alt-G</b>&nbsp&nbsp<em>Jump to line</em> <br />
+                                                            <b>Shift-Ctrl-F</b>&nbsp&nbsp<em>Replace</em> <br />
+                                                            <b>Shift-Ctrl-R</b>&nbsp&nbsp<em>Replace all</em> <br />
+                                                            <b>Ctrl-D</b>&nbsp&nbsp<em>Delete line</em> <br />
+                                                            <b>Ctrl-Z</b>&nbsp&nbsp<em>Undo</em> <br />
+                                                            <b>Ctrl-Y</b>&nbsp&nbsp<em>Redo</em> <br />
+                                                            <b>Ctrl-F</b>&nbsp&nbsp<em>Start searching</em> <br />
+                                                            <b>Ctrl-G</b>&nbsp&nbsp<em>Find next</em> <br />
+                                                            <b>Shift-Ctrl-G</b>&nbsp&nbsp<em>Find previous</em> <br />
+                                                            <b>Alt-F</b>&nbsp&nbsp<em>Search dialog doesn't autoclose, enter to find next, Shift-Enter to find previous</em> <br />
+                                                        </div>
+                                                        "
+                                                    >
+                                                        <i class="feather icon-info"></i>
+                                                    </span>
+                                                    <textarea class="form-control" name="p4-code" id="p4-code"></textarea>
+                                                </div>
+
+                                                <!-- Advanced Options Modal -->
+                                                <div class="modal fade" id="optionsModal" tabindex="-1" role="dialog" aria-labelledby="optionsModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="optionsModalLabel">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label>DPDK Options</label>
+                                                                <input name="dpdk_opts" type="text" class="form-control" value="arch=dpdk hugepages=1024 model=v1model smem vethmode">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>EAL Parameters</label>
+                                                                <input name="eal_opts" type="text" class="form-control" value="-l 2 -n 4 --no-pci --vdev net_pcap0,iface=eth0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Command Options</label>
+                                                                <input name="cmd_opts" type="text" class="form-control" value="{{"-p 0x0 --config \"\\\"(0,0,2)\\\"\""}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <button type="button" class="btn btn-primary">
+                                                    <i class="feather icon-upload"></i>Run
+                                                </button>
+
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#optionsModal">
+                                                    <i class="feather icon-settings"></i>Advanced
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- [ Main Content ] end -->
                 </div>
@@ -24,4 +144,56 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+<script src="/static/assets/js/codemirror/codemirror.js"></script>
+<script src="/static/assets/js/codemirror/codemirror-p4-mode.js"></script>
+<script src="/static/assets/js/codemirror/search.js"></script>
+<script src="/static/assets/js/codemirror/searchcursor.js"></script>
+<script src="/static/assets/js/codemirror/jump-to-line.js"></script>
+<script src="/static/assets/js/codemirror/dialog.js"></script>
+<script src="/static/assets/js/codemirror/closebrackets.js"></script>
+<script src="/static/assets/js/codemirror/matchbrackets.js"></script>
+<script src="/static/assets/js/codemirror/simplescrollbars.js"></script>
+<script src="/static/assets/js/codemirror/placeholder.js"></script>
+
+
+<script>
+    csrftoken = getCookie('csrftoken');
+
+    CodeMirror.commands.save = function(editor) {
+        const name = $('#name').val();
+        const compiler = $('#compiler').val();
+
+        if (name == null || name == '') {
+            return;
+        }
+
+        if (compiler == null || compiler == '') {
+            return;
+        }
+
+        sendPostRequest("{% url 'upload_program' %}", {
+            name: name,
+            compiler: compiler,
+            code : btoa(editor.getValue())
+        });
+
+    };
+
+    var cEditor = CodeMirror.fromTextArea(document.getElementById("p4-code"), {
+        autoCloseBrackets: true,
+        lineWiseCopyCut: true,
+        scrollbarStyle: "overlay",
+        placeholder: "Code goes here...",
+        matchBrackets: true,
+        matchBrackets: true,
+        lineNumbers: true,
+        smartIndent: true,
+        indentUnit: 4,
+        tabSize: 4,
+        mode: "text/x-p4"
+    });
+</script>
+
+{% endblock javascripts %}
