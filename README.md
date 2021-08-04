@@ -1,11 +1,17 @@
 <p align="center">
-  <img alt="P4Pi Logo" width="256px" src="p4pi-web/dashboard/static/assets/images/logo.png">
+  <img alt="P4Pi Logo" width="256px" src="docs/images/logo.png">
 </p>
 
 -------------------------------------------------------------------------------
 
 P4Pi (pronounced papi or puppy) allows to design and deploy network data planes
 written in P4 using the Raspberry Pi platform.
+
+# Getting Started
+
+Please refer to the [P4Pi Wiki Pages](https://github.com/p4lang/p4pi/wiki).
+
+The following instructions are for experts looking to build their own image. We recommend starting from the generated P4Pi images, as detailed in the wiki.
 
 # Common
 
