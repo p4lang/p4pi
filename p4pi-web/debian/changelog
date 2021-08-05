@@ -1,5 +1,5 @@
-p4pi-web (0.1.0-1) bullseye; urgency=medium
+p4pi-web (0.1.0-2) bullseye; urgency=medium
 
   * Initial release
 
- -- Radostin Stoyanov <radostin@stoyanov.io>  Sun, 01 Aug 2021 17:05:43 +0100
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 05 Aug 2021 18:26:40 +0100

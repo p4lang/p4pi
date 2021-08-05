@@ -1,25 +1,36 @@
+import subprocess
+import json
+
+from django.http.response import JsonResponse
 from django.shortcuts import render
-from .forms import LoginForm, SignUpForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-import subprocess
-
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
 from django import template
 
+from .forms import LoginForm, SignUpForm
 from .forms import AccessPointSettingsForm
 from . import utils
 
+
 @login_required(login_url="/login")
-def index(request):
+def switch(request):
+    html_template = loader.get_template('index.html')
+    context = {'segment': 'ap', 'errors': []}
 
-    context = {}
-    context['segment'] = 'index'
+    if request.method == 'GET':
+        return HttpResponse(html_template.render(context, request))
 
-    html_template = loader.get_template( 'index.html' )
-    return HttpResponse(html_template.render(context, request))
+    if request.method == 'POST':
+        post_data = json.loads(request.body.decode("utf-8"))
+        if 'compiler' not in post_data:
+            return JsonResponse({'success': False, 'message': 'Missing compiler filed'})
+        if 'code' not in post_data:
+            return JsonResponse({'success': False, 'message': 'Missing code filed'})
+        utils.save_p4_example(post_data['code'])
+    return JsonResponse({'success': True})
 
 
 @login_required(login_url="/login")
