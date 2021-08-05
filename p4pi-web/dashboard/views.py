@@ -1,16 +1,16 @@
+import subprocess
 from django.shortcuts import render
-from .forms import LoginForm, SignUpForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-import subprocess
-
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
 from django import template
 
+from .forms import LoginForm, SignUpForm
 from .forms import AccessPointSettingsForm
 from . import utils
+
 
 @login_required(login_url="/login")
 def index(request):

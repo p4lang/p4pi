@@ -1,7 +1,6 @@
 import re
-import pycountry
-
 from pathlib import Path
+import pycountry
 
 
 def update_dhcpcd_config(static_ip_address):
