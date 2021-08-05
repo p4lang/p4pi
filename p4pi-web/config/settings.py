@@ -46,8 +46,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "switch"
+LOGOUT_REDIRECT_URL = "switch"
 TEMPLATE_DIR = os.path.join(CONFIG_DIR, "dashboard/templates")
 
 TEMPLATES = [
