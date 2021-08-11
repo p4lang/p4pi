@@ -9,7 +9,7 @@ The source code of the example is available under [T4P4S examples](https://githu
 ## Testing with WiFi access only
 The following figure depicts the default setup of a P4Pi node:
 <p align="center">
-  <img alt="Default settings of P4Pi" width="256px" src="../../images/l2switch_setupA.png">
+  <img alt="Default settings of P4Pi" width="600px" src="../../images/l2switch_setupA.png">
 </p>
 
 P4Pi runs a DHCP daemon (dnsmasq) to assign IP addresses to devices connected through WiFi. The generated T4P4S switch interconnects the wireless interface wlan0 and the linux brige br1. However, the 1GE Ethernet port eth0 is not used. The default management IP is assigned to br0. Through this IP address the P4Pi node is accessible (e.g., via the web interface or SSH).
@@ -75,7 +75,7 @@ sudo tcpdump -i br0 icmp
 ## Testing as a hotspot sharing the Internet access of a home router (or a private network domain)
 The following figure depicts another setup where P4Pi node acts as a low level relay or proxy between your laptop and your home router (or a private network) connected to the 1GE wired Ethernet port.
 <p align="center">
-  <img alt="Low level gateway mode of P4Pi" width="256px" src="../../images/l2switch_setupB.png">
+  <img alt="Low level gateway mode of P4Pi" width="900px" src="../../images/l2switch_setupB.png">
 </p>
 
 ### Step 1 - Connect to P4Pi
