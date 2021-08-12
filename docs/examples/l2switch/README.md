@@ -2,7 +2,7 @@
 
 This example shows the P4 program running on P4Pi by default. It implements the core functionalities of a simple L2 switch: 1) MAC learning (control plane support is needed) and 2) forwarding of Ethernet frames.
 
-To this end, it consists of two tables: smac and dmac. Table smac is responsible to store the source MAC addresses learned by the switch and send digest messages to the control plane for each unseen source MAC. Table dmac is used for forwarding Ethernet frames toward the proper direction (egress port) or apples broadcasting (Note: broadcasting in T4P4S is implemented by setting the egress port to 100). As an extension we also allow packet dropping in both tables so that MAC-based filtering is also possible for demonstration.
+To this end, it consists of two tables: smac and dmac. Table smac is responsible to store the source MAC addresses learned by the switch and send digest messages to the control plane for each unseen source MAC. Table dmac is used for forwarding Ethernet frames toward the proper direction (egress port) or applies broadcasting (Note: broadcasting in T4P4S is implemented by setting the egress port to 100). As an extension we also allow packet dropping in both tables so that MAC-based filtering is also possible for demonstration.
 
 The source code of the example is available under [T4P4S examples](https://github.com/P4EDGE/t4p4s/blob/master/examples/l2switch.p4).
 
@@ -18,7 +18,7 @@ P4Pi runs a DHCP daemon (dnsmasq) to assign IP addresses to devices connected th
 Connect your laptop to the wireless access point called p4pi. After that your laptop will get an IP address assigned by the DHCP service (from the default address pool 192.168.4.0/24).
 
 ### Step 2 - Setup br1 in gigport network namespace
-First, you should open an SSH connection to the device using its management IP (192.168.4.101 by default) (we refer to it as "SSH terminal"). Then set up the IP address of br1, so that we could send traffic with standard tools like ping. 
+First, you should open an SSH connection to the device using its management IP (192.168.4.101 by default) (we refer to it as "SSH terminal"). Then set up the IP address of br1, so that we could send traffic with standard tools like ping.
 
 In the SSH terminal:
 ```bash
