@@ -18,7 +18,7 @@ P4Pi runs a DHCP daemon (dnsmasq) to assign IP addresses to devices connected th
 Connect your laptop to the wireless access point called p4pi. After that your laptop will get an IP address assigned by the DHCP service (from the default address pool 192.168.4.0/24).
 
 ### Step 2 - Setup br1 in gigport network namespace
-First, you should open an SSH connection to the device using its management IP (192.168.4.101 by default) (we refer to it as "SSH terminal"). Then set up the IP address of br1, so that we could send traffic with standard tools like ping. 
+First, you should open an SSH connection to the device using its management IP (192.168.4.101 by default) (we refer to it as "SSH terminal"). Then set up the IP address of br1, so that we could send traffic with standard tools like ping.
 
 In the SSH terminal:
 ```bash
