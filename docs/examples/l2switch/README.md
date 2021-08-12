@@ -12,7 +12,7 @@ The following figure depicts the default setup of a P4Pi node:
   <img alt="Default settings of P4Pi" width="600px" src="../../images/l2switch_setupA.png">
 </p>
 
-P4Pi runs a DHCP daemon (dnsmasq) to assign IP addresses to devices connected through WiFi. The generated T4P4S switch interconnects the wireless interface wlan0 and the linux brige br1. However, the 1GE Ethernet port eth0 is not used. The default management IP is assigned to br0. Through this IP address the P4Pi node is accessible (e.g., via the web interface or SSH).
+P4Pi runs a DHCP daemon (dnsmasq) to assign IP addresses to devices connected through WiFi. The generated T4P4S switch interconnects the wireless interface wlan0 and the linux bridge br1. However, the 1GE Ethernet port eth0 is not used. The default management IP is assigned to br0. Through this IP address the P4Pi node is accessible (e.g., via the web interface or SSH).
 
 ### Step 1 - Connecting to P4Pi
 Connect your laptop to the wireless access point called p4pi. After that your laptop will get an IP address assigned by the DHCP service (from the default address pool 192.168.4.0/24).
@@ -93,7 +93,7 @@ The following script should be executed to turn your P4Pi node into gateway mode
 /home/pi/p4pi/utils/setup_eth_wlan_bridge.sh
 ```
 
-This script will create the settings shown in the previous figure: setup brige br2 and connect port 1 of T4P4S switch to the 1GE wired interface and configure new management IPs. The possible management IPs through which you can access the P4Pi node (incl. SSH, web interface, etc.) are reported by the script like this example output:
+This script will create the settings shown in the previous figure: setup bridge br2 and connect port 1 of T4P4S switch to the 1GE wired interface and configure new management IPs. The possible management IPs through which you can access the P4Pi node (incl. SSH, web interface, etc.) are reported by the script like this example output:
 ```
 +-------------------------------------------------------------
 | Management IP on the wired interface: 192.168.1.146/24
