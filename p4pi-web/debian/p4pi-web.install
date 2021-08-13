@@ -98,7 +98,7 @@ dashboard/static/assets/plugins/jquery/js/jquery.min.js srv/p4pi/dashboard/stati
 dashboard/static/favicon.ico srv/p4pi/dashboard/static
 dashboard/templates/accounts/login.html srv/p4pi/dashboard/templates/accounts/
 dashboard/templates/accounts/register.html srv/p4pi/dashboard/templates/accounts/
-dashboard/templates/auth-reset-pass.html srv/p4pi/dashboard/templates/
+dashboard/templates/accounts/password_change.html srv/p4pi/dashboard/templates/accounts/
 dashboard/templates/includes/scripts.html srv/p4pi/dashboard/templates/includes/
 dashboard/templates/includes/navigation.html srv/p4pi/dashboard/templates/includes/
 dashboard/templates/layouts/base-fullscreen.html srv/p4pi/dashboard/templates/layouts/

@@ -2,15 +2,18 @@ import subprocess
 import json
 
 from django.http.response import JsonResponse
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
 from django import template
 
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm, CustomPasswordChangeForm
 from .forms import AccessPointSettingsForm
 from . import utils
 
@@ -136,3 +139,25 @@ def register_user(request):
     else:
         form = SignUpForm()
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success" : success })
+
+
+@login_required(login_url="/login")
+def password_change(request):
+    html_template = loader.get_template('accounts/password_change.html')
+    context = {'errors': []}
+
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(
+                request,
+                'Your password has been successfully updated.'
+            )
+            return redirect("/")
+    else:
+        context['form'] = CustomPasswordChangeForm(user=request.user)
+
+    return HttpResponse(html_template.render(context, request))
