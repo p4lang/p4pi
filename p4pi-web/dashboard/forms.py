@@ -1,5 +1,8 @@
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django import forms
 from .utils import get_countries
 
@@ -121,3 +124,22 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2')
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomPasswordChangeForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.form_action = 'password_change'
+        self.helper.label_class = 'control-label'
+        self.helper.field_class = 'mb-4'
+        self.helper.add_input(
+            Submit('submit', 'Change Password', css_class='mb-4 shadow-2')
+        )
+
+        self.base_fields['old_password'].widget.attrs['class'] = 'form-control'
+        self.base_fields['old_password'].widget.attrs['class'] = 'form-control'
+        self.base_fields['new_password1'].widget.attrs['class'] = 'form-control'
+        self.base_fields['new_password1'].help_text = ''
+        self.base_fields['new_password2'].widget.attrs['class'] = 'form-control'
