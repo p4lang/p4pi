@@ -35,14 +35,25 @@
     <div class="pcoded-main-container">
         <div class="pcoded-wrapper">
 
+            {% for message in messages %}
+            <div class="messages">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message | safe }}
+                </div>
+            </div>
+            {% endfor %}
+
             {% block content %}{% endblock content %}
 
         </div>
     </div>
 
-    {% include 'includes/scripts.html' %}
+    {% include 'includes/scripts.html' %}{% block javascripts %}
 
-    {% block javascripts %}{% endblock javascripts %}
+    {% endblock javascripts %}
 
 </body>
 </html>

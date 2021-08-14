@@ -7440,6 +7440,12 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
   padding: 15px;
   z-index: 5;
 }
+.auth-wrapper .help-inline {
+  color: red;
+}
+.auth-wrapper .controls {
+  margin-bottom: 1.5rem!important;
+}
 .auth-wrapper .auth-content.multyform, .auth-wrapper .auth-content.subscribe {
   width: 750px;
 }
@@ -10602,4 +10608,11 @@ div.code-toolbar > .toolbar span:hover {
 .form-group.required .control-label:after {
   content:" *";
   color:red;
+}
+
+.messages {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  z-index: 100;
 }
