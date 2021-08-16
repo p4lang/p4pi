@@ -43,6 +43,8 @@ htop
 iperf
 iperf3
 iputils-ping
+isc-dhcp-client
+isc-dhcp-common
 keyboard-configuration
 less
 libboost-dev
