@@ -21,8 +21,31 @@ mv /boot/vmlinuz-5.10.52-v8+ /boot/kernel8.img
 systemctl enable p4pi-web
 
 # Install T4P4S dependencies
-pip3 install meson pyelftools pybind11 pysimdjson ipaddr scapy dill setuptools backtrace ipdb termcolor colored pyyaml ujson ruamel.yaml
+pip3 install meson pyelftools pybind11 pysimdjson ipaddr scapy dill setuptools backtrace ipdb termcolor colored pyyaml ujson ruamel.yaml p4runtime-shell
 
 if [ -z "$(ls -A /root/t4p4s)" ] ; then
 	git clone --recursive https://github.com/p4edge/t4p4s /root/t4p4s
 fi
+
+git clone -b v1.37.0 --recursive --shallow-submodules --depth=1 https://github.com/grpc/grpc /root/grpc
+mkdir /root/PI && cd /root/PI
+git init
+git remote add origin https://github.com/p4lang/PI
+git fetch --depth 1 origin a5fd855d4b3293e23816ef6154e83dc6621aed6a
+git checkout FETCH_HEAD
+git submodule update --init --recursive --depth=1
+git clone --depth=1 https://github.com/P4ELTE/P4Runtime_GRPCPP /root/P4Runtime_GRPCPP
+cd /root/P4Runtime_GRPCPP
+./install.sh
+./compile.sh
+
+ENVVAR_FILE=/home/pi/t4p4s_envvars.sh
+
+cat << EOT >${ENVVAR_FILE}
+export P4PI=/root/PI
+export GRPCPP=/root/P4Runtime_GRPCPP
+export GRPC=/root/grpc
+EOT
+
+chmod +x ${ENVVAR_FILE}
+echo ". ${ENVVAR_FILE}" >> /home/pi/.profile
