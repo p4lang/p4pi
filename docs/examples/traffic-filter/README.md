@@ -15,7 +15,7 @@ This example works as a stateless traffic filter with support for IPv4 TCP and U
 * udpSrcPort
 * udpDstPort
 
-We use blacklisting, which involves defining which entities should be blocked. So by default, we allow everything to pass through the switch. (See Functionalities to be added during the hackathon or later chapter for improvement ideas)
+We use blocklisting, which involves defining which entities should be blocked. So by default, we allow everything to pass through the switch. (See Functionalities to be added during the hackathon or later chapter for improvement ideas)
 
 ## Testing with WiFi access only
 The following figure depicts the default setup of a P4Pi node:
@@ -50,8 +50,8 @@ iperf -c 192.168.4.150 -t 30 -i 1
 ```
 You can also test UDP traffic with iperf, or use netcat for both cases.
 
-### Step 4 - Filling the blacklist
-The next step is to launch P4Runtime shell, that is used to insert blacklist rules. In the SSH terminal run:
+### Step 4 - Filling the blocklist
+The next step is to launch P4Runtime shell, that is used to insert blocklist rules. In the SSH terminal run:
 ```bash
 echo "Generating the required files for P4 runtime"
 p4c-bm2-ss --p4v 16 --p4runtime-file firewall.p4runtime --p4runtime-format text --toJSON firewall.json  ~/p4pi/t4p4s/examples/firewall.p4
@@ -141,5 +141,5 @@ te.insert
 Internet access should work properly on your laptop, however, no HTTP website will load. (HTTPS still works fine).
 
 ## Functionalities to be added during the hackathon or later
-* Try to modify the P4 code to change the blacklist behavior to whitelist. Instead of allowing everything by default, block all traffic and allow only flows that match the inserted rules.
+* Try to modify the P4 code to change the blocklist behavior to allowlist. Instead of allowing everything by default, block all traffic and allow only flows that match the inserted rules.
 * Add support for IPv6
