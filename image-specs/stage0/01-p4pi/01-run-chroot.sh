@@ -39,13 +39,10 @@ cd /root/P4Runtime_GRPCPP
 ./install.sh
 ./compile.sh
 
-ENVVAR_FILE=/home/pi/t4p4s_envvars.sh
+cat << EOT >>/etc/bash.bashrc
 
-cat << EOT >${ENVVAR_FILE}
+# T4P4S env variables
 export P4PI=/root/PI
 export GRPCPP=/root/P4Runtime_GRPCPP
 export GRPC=/root/grpc
 EOT
-
-chmod +x ${ENVVAR_FILE}
-echo ". ${ENVVAR_FILE}" >> /home/pi/.profile
