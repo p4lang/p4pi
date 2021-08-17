@@ -24,6 +24,7 @@ wsproto = "^1.0.0"
 channels = "^3.0.4"
 python-decouple = "^3.4"
 pycountry = "^20.7.3"
+django-crispy-forms = "^1.12.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
