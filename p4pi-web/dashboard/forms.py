@@ -47,7 +47,7 @@ class AccessPointSettingsForm(forms.Form):
         label='Static IP Address',
         widget=forms.TextInput(
             attrs={
-                'placeholder': '192.168.0.1/24',
+                'placeholder': '192.168.4.1/24',
                 'class': 'form-control'
             }
         ),
@@ -56,7 +56,7 @@ class AccessPointSettingsForm(forms.Form):
         label='DHCP Range Start Address',
         widget=forms.TextInput(
             attrs={
-                'placeholder': '192.168.0.2',
+                'placeholder': '192.168.4.2',
                 'class': 'form-control'
             }
         ),
@@ -65,7 +65,7 @@ class AccessPointSettingsForm(forms.Form):
         label='DHCP Range End Address',
         widget=forms.TextInput(
             attrs={
-                'placeholder': '192.168.0.20',
+                'placeholder': '192.168.4.20',
                 'class': 'form-control'
             }
         ),
