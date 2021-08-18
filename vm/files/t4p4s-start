@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export P4PI=/root/PI
+export GRPCPP=/root/P4Runtime_GRPCPP
+export GRPC=/root/grpc
+
+P4_PROG=l2switch
+T4P4S_PROG_FILE=/root/t4p4s-switch
+if [ -f "${T4P4S_PROG_FILE}" ]; then
+    P4_PROG=$(cat "${T4P4S_PROG_FILE}")
+else
+    echo "${P4_PROG}" > "${T4P4S_PROG_FILE}"
+fi
+
+/root/t4p4s/t4p4s.sh :"${P4_PROG}" p4rt
