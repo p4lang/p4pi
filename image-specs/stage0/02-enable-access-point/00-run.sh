@@ -2,6 +2,7 @@
 
 install -m 644 files/dhcpcd.conf "${ROOTFS_DIR}/etc/"
 install -m 644 files/dnsmasq.conf "${ROOTFS_DIR}/etc/"
+install -m 644 files/p4pi.conf "${ROOTFS_DIR}/etc/dnsmasq.d/"
 install -m 644 files/hostapd.conf "${ROOTFS_DIR}/etc/hostapd/"
 install -m 644 files/rfkill-unblock-wifi.service "${ROOTFS_DIR}/lib/systemd/system/"
 
