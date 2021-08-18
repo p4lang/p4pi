@@ -46,20 +46,21 @@ Note that calc.py has several dependencies (Python 3 modules): scapy, pyreadline
 
 ## Running the test script on Windows OS
 
-* The easiest way is to use an Anaconda installation with Python 3: 
-* The dependencies can be installed inside an Anaconda Prompt: [Installing on Windows](https://docs.anaconda.com/anaconda/install/windows/)
+The easiest way is to use an Anaconda installation with Python 3: [Installing on Windows](https://docs.anaconda.com/anaconda/install/windows/). The dependencies can be installed inside an Anaconda Prompt: 
 ```bash
 pip3 install scapy
 pip3 install pyreadline
 pip3 install six
 ```
-* Set the iface variable at line 71 of calc.py to the name of the used wireless  interface (e.g., 'Wi-Fi' in most Windows systems).
+
+Then the iface variable at line 71 of calc.py needs to be set to the name of the used wireless  interface (e.g., 'Wi-Fi' in most Windows systems).
 ```python
 ...
     iface = 'Wi-Fi'
 ...
 ```
-* Execute calc.py in an Anaconda Prompt as previously:
+
+Finally, you can execute calc.py in an Anaconda Prompt as in Linux systems:
 ```bash
 python3 calc.py
 ```
