@@ -131,9 +131,9 @@ sudo arp -s 192.168.4.10 00:50:ba:85:85:ca
 ## Environmental variables
 
 ```
-export P4PI=/home/pi/p4pi/t4p4s/pi
-export GRPC=/home/pi/p4pi/t4p4s/grpc
-export GRPCPP=/home/pi/p4pi/t4p4s/P4Runtime_GRPCPP
+export P4PI=/root/t4p4s/pi
+export GRPC=/root/t4p4s/grpc
+export GRPCPP=/root/t4p4s/P4Runtime_GRPCPP
 ```
 
 ## Creating veth pairs

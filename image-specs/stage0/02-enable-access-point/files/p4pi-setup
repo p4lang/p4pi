@@ -23,3 +23,6 @@ ethtool -K veth1-1 tx off
 
 brctl addif br0 veth0-1
 brctl addif br1 veth1-1
+
+ip addr add 192.168.4.150/24 dev br1
+ip link set br1 up
