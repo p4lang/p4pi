@@ -1,5 +1,6 @@
 [Unit]
 Description=T4P4S Switch
+After=p4pi-setup.service
 
 [Service]
 Type=simple
