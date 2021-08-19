@@ -47,15 +47,15 @@ You can check it by running the following commands.
 
 #### Iperf
 
-Start an iperf server:
+Start an iperf server inside the gigport network namespace:
 
-```
-iperf -s 192.168.4.150
+```bash
+sudo ip netns exec gigport iperf -s 192.168.4.150
 ```
 
 And try to connect to it from your laptop.
 
-```
+```bash
 iperf -c 192.168.4.150 -t 30 -i 1
 ```
 
@@ -71,7 +71,7 @@ t4p4s-p4rtshell firewall
 
 Insert a rule to block all TCP traffic
 
-```
+```python
 te = table_entry["MyIngress.ip_proto_filter"](action="MyIngress.drop")
 te.match["hdr.ipv4.protocol"] = "6"
 te.insert
@@ -81,13 +81,13 @@ te.insert
 
 P4Pi
 
-```
-iperf -s 192.168.4.150
+```bash
+sudo ip netns exec gigport iperf -s 192.168.4.150
 ```
 
 And connect to it from your laptop.
 
-```
+```bash
 iperf -c 192.168.4.150 -t 30 -i 1
 ```
 
@@ -95,13 +95,13 @@ Because TCP flows are blocked, it will not connect.
 
 Let's check that UDP still works.
 
-```
-iperf -s 192.168.4.150 -u -p 5003
+```bash
+sudo ip netns exec gigport iperf -s 192.168.4.150 -u -p 5003
 ```
 
 And connect to it from your laptop.
 
-```
+```bash
 iperf -c 192.168.4.150 -t 30 -i 1 -u -p 5003
 ```
 
@@ -109,7 +109,7 @@ iperf -c 192.168.4.150 -t 30 -i 1 -u -p 5003
 
 Any of the previously discussed header fields can be used in the rules. Try to block the UDP 12345 port. (hint: use the udp_dstPort_filter table). Help for the table entry creation:
 
-```
+```python
 te = table_entry["MyIngress.table_name"](action="MyIngress.function_name")
 te.match["name_of_the_field_to_match"] = "value_as_string"
 te.match["if_there_are_more_keys_to_match"] = "value_as_string"
@@ -152,7 +152,7 @@ t4p4s-p4rtshell firewall
 
 Try to block HTTP traffic
 
-```
+```python
 te = table_entry["MyIngress.tcp_dstPort_filter"](action="MyIngress.drop")
 te.match["hdr.tcp.dstPort"] = "80"
 te.insert

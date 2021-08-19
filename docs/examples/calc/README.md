@@ -21,16 +21,16 @@ Start the P4 program (calc.p4) through the web interface or manually with the fo
 echo 'calc' > /root/t4p4s-switch
 systemctl restart t4p4s.service
 ```
-Then you can leave the screen with Ctrl+A+D.
+
 
 ### Step 3 - Generating test traffic
 
-We slightly updated the scapy-based python script of [P4 Tutorial](https://github.com/p4lang/tutorials/blob/master/exercises/calc/calc.py). The modifications include the update to Python 3 and the support of Windows OS. You can run the code as follows:
+We slightly updated the scapy-based python script of [P4 Tutorial](https://github.com/p4lang/tutorials/blob/master/exercises/calc/calc.py). The modifications include the update to Python 3 and the support of Windows OS. You can run the code on your laptop connected to P4Pi as follows:
 ```bash
 python3 calc.py
 ```
 
-This script provides a new prompt for typing basic expressions. After parsing the entered expression, it prepares a packet with the corresponding operator and operands and then send the packet to the switch for evaluation. When the switch returns the result of the computation, the script prints its value. Note that
+This script provides a new prompt for typing basic expressions. After parsing the entered expression, it prepares a packet with the corresponding operator and operands and then send the packet to the switch for evaluation. When the switch returns the result of the computation, the script prints its value.
 
 ```bash
 > 24 + 18
@@ -43,7 +43,7 @@ The result can be seen in the last line while additional status messages are als
 
 Note that calc.py has several dependencies (Python 3 modules): scapy, pyreadline and six.
 
-## Running the test script on Windows OS
+## Running the test script on a laptop with Windows OS
 
 The easiest way is to use an Anaconda installation with Python 3: [Installing on Windows](https://docs.anaconda.com/anaconda/install/windows/). The dependencies can be installed inside an Anaconda Prompt:
 ```bash
