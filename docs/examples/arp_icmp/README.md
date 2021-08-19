@@ -29,7 +29,7 @@ systemctl restart t4p4s.service
 
 ### Step 3 - Filling the tables
 
-1. Connect to P4Pi via ass
+1. Connect to P4Pi via ssh:
 
 ```bash
 ssh pi@192.168.4.1
@@ -41,7 +41,7 @@ ssh pi@192.168.4.1
 t4p4s-p4rtshell arp_icmp
 ```
 
-3. Start sending test traffic to an unused IP address with the same prefix as the one of DHCP IP pool from your laptop. For example, you can use ping tool:
+3. Start sending test traffic to an unused IP address with the same prefix as the one of DHCP IP pool from your laptop. For example, you can use ping tool on your laptop:
 
 ```bash
 ping -n 100 192.168.4.153
