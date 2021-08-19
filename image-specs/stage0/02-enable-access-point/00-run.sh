@@ -6,10 +6,6 @@ install -m 644 files/p4pi.conf "${ROOTFS_DIR}/etc/dnsmasq.d/"
 install -m 644 files/hostapd.conf "${ROOTFS_DIR}/etc/hostapd/"
 install -m 644 files/rfkill-unblock-wifi.service "${ROOTFS_DIR}/lib/systemd/system/"
 
-# Create a bridge device and populate the bridge
-install -m 644 files/bridge-br0.netdev "${ROOTFS_DIR}/etc/systemd/network/"
-install -m 644 files/br0-member-wlan0.network "${ROOTFS_DIR}/etc/systemd/network/"
-
 install -m 755 files/p4pi-setup "${ROOTFS_DIR}/usr/sbin/"
 install -m 644 files/p4pi-setup.service "${ROOTFS_DIR}/lib/systemd/system/"
 
