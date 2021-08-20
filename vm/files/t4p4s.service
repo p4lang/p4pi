@@ -1,0 +1,12 @@
+[Unit]
+Description=T4P4S Switch
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/t4p4s-start
+WorkingDirectory=/root/t4p4s
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+brctl addbr br0
+ip netns add gigport
+
+ip netns exec gigport brctl addbr br1
+ip netns exec gigport brctl setageing br1 0
+
+brctl setageing br0 0
+
+ip link add dev veth0 type veth peer name veth0-1
+ip link add dev veth1 type veth peer name veth1-1
+
+ip link set dev veth0 up
+ip link set dev veth1 up
+
+ip link set dev veth0-1 up
+ip link set veth1-1 netns gigport
+ip netns exec gigport ip link set dev veth1-1 up
+ip netns exec gigport ethtool -K veth1-1 tx off
+
+ethtool -K veth0 tx off
+ethtool -K veth1 tx off
+
+ethtool -K veth0-1 tx off
+
+brctl addif br0 veth0-1
+ip netns exec gigport brctl addif br1 veth1-1
+ip netns exec gigport ip addr add 192.168.4.150/24 dev br1
+ip netns exec gigport ip link set dev br1 up

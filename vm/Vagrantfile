@@ -1,0 +1,57 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/bullseye64"
+
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "p4pi"
+    vb.gui = false
+    vb.memory = 2048
+    vb.cpus = 4
+  end
+
+  config.vm.hostname = "p4pi"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y apt-utils autoconf automake avahi-daemon bash-completion bind9-dnsutils bison bridge-utils build-essential ca-certificates ccache clang cmake console-setup cpp crda curl dbus debconf-utils dosfstools doxygen dpdk dpdk-dev dpdk-doc dphys-swapfile dnsmasq e2fsprogs ed ethtool fake-hwclock fbset fdisk flex gdb git hardlink htop iperf iperf3 iputils-ping isc-dhcp-client isc-dhcp-common keyboard-configuration less libboost-dev libboost-filesystem-dev libboost-graph-dev libboost-iostreams-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libbsd-dev libc-devtools libc++-dev libc6-dev libcrypto++-dev libelf-dev libevent-dev libfdt-dev libffi-dev libfl-dev libfreetype6-dev libgc-dev libgmp-dev libgmpxx4ldbl libgrpc-dev libgrpc++-dev libibverbs-dev libjansson-dev libjudy-dev libmicrohttpd-dev libmtp-runtime libnanomsg-dev libnuma-dev libpcap-dev libprotobuf-c-dev libprotobuf-dev libprotoc-dev libreadline-dev librte-mempool-ring21 librte-mempool21 librte-meta-allpmds librte-meta-baseband librte-meta-bus librte-meta-compress librte-meta-crypto librte-meta-event librte-meta-mempool librte-meta-net librte-meta-raw librte-net-af-packet21 librte-net-bond21 librte-net-e1000-21 librte-net-fm10k21 librte-net-i40e21 librte-net-ixgbe21 librte-net-kni21 librte-net-mlx4-21 librte-net-mlx5-21 librte-net-netvsc21 librte-net-pcap21 librte-net-tap21 librte-net-tap21 librte-net-thunderx21 librte-net-vdev-netvsc21 librte-net-vhost21 librte-net-virtio21 librte-net-vmxnet3-21 libssl-dev libthrift-dev libtool libtool-bin lld llvm locales lshw lua5.1 luajit man-db manpages-dev ncdu net-tools netbase netcat ninja-build ntfs-3g parted pciutils pkg-config policykit-1 protobuf-c-compiler protobuf-compiler protobuf-compiler-grpc psmisc python-is-python3 python3-gpiozero python3-ipaddr python3-pip python3-ply python3-protobuf python3-pyelftools python3-pyroute2 python3-scapy python3-setuptools python3-thrift python3-wheel rng-tools rsync ssh ssh-import-id strace sudo tcpdump thrift-compiler tmux traceroute unzip usb-modeswitch usbutils v4l-utils vim wget wireless-tools wireshark zip zlib1g-dev
+  SHELL
+
+  config.vm.provision "file", source: "files/p4pi-setup", destination: "/tmp/p4pi-setup"
+  config.vm.provision "shell", inline: "mv /tmp/p4pi-setup /usr/sbin/p4pi-setup"
+  config.vm.provision "shell", inline: "chmod 755 /usr/sbin/p4pi-setup"
+
+  config.vm.provision "file", source: "files/t4p4s-start", destination: "/tmp/t4p4s-start"
+  config.vm.provision "shell", inline: "mv /tmp/t4p4s-start /usr/sbin/t4p4s-start"
+  config.vm.provision "shell", inline: "chmod 755 /usr/sbin/t4p4s-start"
+
+  config.vm.provision "file", source: "files/t4p4s-p4rtshell", destination: "/tmp/t4p4s-p4rtshell"
+  config.vm.provision "shell", inline: "mv /tmp/t4p4s-p4rtshell /usr/sbin/t4p4s-p4rtshell"
+  config.vm.provision "shell", inline: "chmod 755 /usr/sbin/t4p4s-p4rtshell"
+
+  config.vm.provision "file", source: "files/t4p4s.service", destination: "/tmp/t4p4s.service"
+  config.vm.provision "shell", inline: "mv /tmp/t4p4s.service /lib/systemd/system/t4p4s.service"
+  config.vm.provision "shell", inline: "chmod 755 /usr/sbin/t4p4s-p4rtshell"
+
+  config.vm.provision "file", source: "files/p4pi-setup.service", destination: "/tmp/p4pi-setup.service"
+  config.vm.provision "shell", inline: "mv /tmp/p4pi-setup.service /lib/systemd/system/p4pi-setup.service"
+
+  config.vm.provision "file", source: "files/jupyter.service", destination: "/tmp/jupyter.service"
+  config.vm.provision "shell", inline: "mv /tmp/jupyter.service /lib/systemd/system/jupyter.service"
+
+  config.vm.provision "file", source: "files/bash.bashrc", destination: "/tmp/bash.bashrc"
+  config.vm.provision "shell", inline: "mv /tmp/bash.bashrc /etc/bash.bashrc"
+
+  config.vm.provision "file", source: "files/p4pi.conf", destination: "/tmp/p4pi.conf"
+  config.vm.provision "shell", inline: "mv /tmp/p4pi.conf /etc/dnsmasq.d/p4pi.conf"
+
+  config.vm.provision "file", source: "files/dhcpcd.conf", destination: "/tmp/dhcpcd.conf"
+  config.vm.provision "shell", inline: "mv /tmp/dhcpcd.conf /etc/dnsmasq.d/dhcpcd.conf"
+
+  config.vm.provision "shell", path: "bootstrap.sh"
+
+end
