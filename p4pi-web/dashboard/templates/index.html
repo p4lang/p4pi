@@ -48,19 +48,28 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <form>
-                                                <div class="form-group required">
-                                                    <label class="control-label">Name</label>
-                                                    <input type="text" class="form-control" id="name" placeholder="switch" required>
-                                                </div>
-
                                                 <div class="form-group">
-                                                    <label for="compiler">Compiler</label>
+                                                    <label for="compiler">Compiler / Target</label>
                                                     <select class="form-control" id="compiler">
                                                         <option>T4P4S</option>
                                                     </select>
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <label for="p4-program">P4 Program</label>
+                                                    <select class="form-control" name="p4-program" id="p4-program">
+                                                        <option value="l2switch">L2 Switch</option>
+                                                        <option value="calc">Calculator</option>
+                                                        <option value="reflector">Reflector</option>
+                                                        <option value="firewall">Firewall</option>
+                                                        <option value="stateful">Stateful Firewall</option>
+                                                        <option value="basic_mirror">Basic Mirror</option>
+                                                        <option value="arp_icmp">ARP/ICMP</option>
+                                                        <option value="custom">Custom</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group d-none" id="p4-editor">
                                                     <label for="p4-code">P4 Code</label>
                                                     <span
                                                         data-toggle="tooltip"
@@ -87,46 +96,10 @@
                                                     <textarea class="form-control" name="p4-code" id="p4-code"></textarea>
                                                 </div>
 
-                                                <!-- Advanced Options Modal -->
-                                                <div class="modal fade" id="optionsModal" tabindex="-1" role="dialog" aria-labelledby="optionsModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="optionsModalLabel">Modal title</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label>DPDK Options</label>
-                                                                <input name="dpdk_opts" type="text" class="form-control" value="arch=dpdk hugepages=1024 model=v1model smem vethmode">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>EAL Parameters</label>
-                                                                <input name="eal_opts" type="text" class="form-control" value="-l 2 -n 4 --no-pci --vdev net_pcap0,iface=eth0">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Command Options</label>
-                                                                <input name="cmd_opts" type="text" class="form-control" value="{{"-p 0x0 --config \"\\\"(0,0,2)\\\"\""}}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                                 <hr>
 
-                                                <button type="button" class="btn btn-primary">
+                                                <button type="button" class="btn btn-primary" onclick="upload()">
                                                     <i class="feather icon-upload"></i>Run
-                                                </button>
-
-                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#optionsModal">
-                                                    <i class="feather icon-settings"></i>Advanced
                                                 </button>
                                             </form>
                                         </div>
@@ -161,21 +134,40 @@
 <script>
     csrftoken = getCookie('csrftoken');
 
-    CodeMirror.commands.save = function(editor) {
-        const name = $('#name').val();
+    function upload() {
         const compiler = $('#compiler').val();
-
-        if (name == null || name == '') {
-            return;
-        }
+        const program = $('#p4-program').val();
 
         if (compiler == null || compiler == '') {
             return;
         }
 
+        if (program == null || program == '') {
+            return;
+        }
+
         sendPostRequest("{% url 'upload_program' %}", {
-            name: name,
             compiler: compiler,
+            program: program,
+            code : ''
+        });
+    }
+
+    CodeMirror.commands.save = function(editor) {
+        const compiler = $('#compiler').val();
+        const program = $('#p4-program').val();
+
+        if (compiler == null || compiler == '') {
+            return;
+        }
+
+        if (program == null || program == '') {
+            return;
+        }
+
+        sendPostRequest("{% url 'upload_program' %}", {
+            compiler: compiler,
+            program: program,
             code : btoa(editor.getValue())
         });
 
@@ -188,11 +180,20 @@
         placeholder: "Code goes here...",
         matchBrackets: true,
         matchBrackets: true,
-        lineNumbers: true,
+        lineNumbers: false,
         smartIndent: true,
         indentUnit: 4,
         tabSize: 4,
         mode: "text/x-p4"
+    });
+
+    $('#p4-program').on('change', () => {
+        const val = $('#p4-program').val();
+        if (val === "custom") {
+            $('#p4-editor').removeClass('d-none');
+        } else {
+            $('#p4-editor').addClass('d-none');
+        }
     });
 </script>
 
