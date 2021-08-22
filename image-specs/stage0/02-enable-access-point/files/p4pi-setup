@@ -11,6 +11,11 @@ brctl setageing br0 0
 ip link add dev veth0 type veth peer name veth0-1
 ip link add dev veth1 type veth peer name veth1-1
 
+ip link set dev veth0 address 00:04:00:00:00:00
+ip link set dev veth0-1 address 00:04:00:00:00:10
+ip link set dev veth1 address 00:04:00:00:10:00
+ip link set dev veth1-1 address 00:04:00:00:10:10
+
 ip link set dev veth0 up
 ip link set dev veth1 up
 
