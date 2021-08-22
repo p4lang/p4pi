@@ -36,19 +36,19 @@ systemctl restart t4p4s.service
 
 If the `check_ports` table is not filled up, every port is recognized as external. Therefore no TCP traffic can go through the firewall. You can check it by running the following commands.
 
-Start an iperf server:
+Start an iperf server on P4Pi in the network namespace gigport:
 
 ```bash
-iperf -s 192.168.4.150
+sudo ip netns exec gigport iperf -s 192.168.4.150
 ```
 
-And try to connect to it from your laptop.
+And try to connect to it from your laptop with the iperf client:
 
 ```bash
 iperf -c 192.168.4.150 -t 30 -i 1
 ```
 
-Nothing will happen, because the traffic is filtered.
+Nothing will happen because the traffic is filtered.
 
 ### Step 4 - Configuring the internal and external ports
 
@@ -83,32 +83,33 @@ te.insert
 
 With the setup described above, now we should be able to establish TCP connections originated from the WLAN interface.
 
-For example, start an iperf server through the SSH.
+For example, start an iperf server through the  P4Pi's SSH connection in the network namespace gigport:
 
 ```
-iperf -s 192.168.4.150
+sudo ip netns exec gigport iperf -s 192.168.4.150
 ```
 
-And connect to it from your laptop.
+And connect to it from your laptop:
 
 ```
 iperf -c 192.168.4.150 -t 30 -i 1
 ```
 
-Because WLAN (port0) is assigned as an internal port, the client can connect and some performance results start to show up.
+Since WLAN (port0) is assigned as an internal port, the client can connect to the server and some performance results start showing up.
 
 Also, check what happens if we run the commands the opposite way,
 On your laptop check your IP and start the iperf server:
 
 ```
-ifconfig wlan0 # Get your IP
+ifconfig wlan0 # Get your IP on Linux
+# ipconfig # Get your IP for Wi-Fi adapter on Windows OS
 iperf -s xyz # Where xyz is your IP address
 ```
 
-On the P4Pi run the iperf client
+On the P4Pi run the iperf client in the namespace gigport:
 
 ```
-iperf -c xyz -t 60 -i 1 # Where xyz is your IP address
+sudo ip netns exec gigport iperf -c xyz -t 60 -i 1 # Where xyz is your IP address
 ```
 
 ## Testing as a hotspot sharing the Internet access of a home router (or a private network domain)
