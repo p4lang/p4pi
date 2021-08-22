@@ -9,7 +9,7 @@ const bit<8>  TYPE_TCP  = 6;
 
 #define BLOOM_FILTER_ENTRIES 65535
 #4096
-#define BLOOM_FILTER_BIT_WIDTH 8
+#define BLOOM_FILTER_BIT_WIDTH 32
 
 /*************************************************************************
 *********************** H E A D E R S  ***********************************
@@ -26,8 +26,7 @@ header ethernet_t {
 }
 
 header ipv4_t {
-    bit<4>    version;
-    bit<4>    ihl;
+    bit<8>    versionihl;
     bit<8>    diffserv;
     bit<16>   totalLen;
     bit<16>   identification;
@@ -125,11 +124,12 @@ control MyIngress(inout headers hdr,
     register<bit<BLOOM_FILTER_BIT_WIDTH>>(BLOOM_FILTER_ENTRIES) bloom_filter_1;
     register<bit<BLOOM_FILTER_BIT_WIDTH>>(BLOOM_FILTER_ENTRIES) bloom_filter_2;
     bit<32> reg_pos_one; bit<32> reg_pos_two;
-    bit<8> reg_val_one; bit<8> reg_val_two;
-    bit<8> direction;
+    bit<32> reg_val_one; bit<32> reg_val_two;
+    bit<32> direction;
 
     action drop() {
         mark_to_drop(standard_metadata);
+        exit;
     }
 
     action compute_hashes(ip4Addr_t ipAddr1, ip4Addr_t ipAddr2, bit<16> port1, bit<16> port2){
@@ -155,28 +155,16 @@ control MyIngress(inout headers hdr,
        }
     }
 
-    action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
+/*    action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
         standard_metadata.egress_spec = port;
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
+*/
     
-    table ipv4_lpm {
-        key = {
-            hdr.ipv4.dstAddr: lpm;
-        }
-        actions = {
-            ipv4_forward;
-            drop;
-            NoAction;
-        }
-        size = 1024;
-        default_action = drop();
-    }
-
     action set_direction(bit<1> dir) {
-        direction = (bit<8>)dir;
+        direction = (bit<32>)dir;
     }
 
     table check_ports {
@@ -196,7 +184,6 @@ control MyIngress(inout headers hdr,
         standard_metadata.egress_spec = (standard_metadata.ingress_port+1)%2;
         standard_metadata.egress_port = (standard_metadata.ingress_port+1)%2;
         if (hdr.ipv4.isValid()){
-            //ipv4_lpm.apply();
             if (hdr.tcp.isValid()){
                 //compute_hashes(hdr.ipv4.srcAddr, hdr.ipv4.dstAddr, hdr.tcp.srcPort, hdr.tcp.dstPort);
                 direction = 0; // default
@@ -207,13 +194,17 @@ control MyIngress(inout headers hdr,
                         // Packet comes from internal network
                         // If there is a syn we update the bloom filter and add the entry
                         if (hdr.tcp.syn == 1){
-                            bloom_filter_1.write(reg_pos_one, 1);
-                            bloom_filter_2.write(reg_pos_two, 1);
+			    @atomic{
+                             bloom_filter_1.write(reg_pos_one, 1);
+                             bloom_filter_2.write(reg_pos_two, 1);
+                            }
                         }
                     } else{ // Packet comes from external network
                         compute_hashes(hdr.ipv4.dstAddr, hdr.ipv4.srcAddr, hdr.tcp.dstPort, hdr.tcp.srcPort);
-                        bloom_filter_1.read(reg_val_one, reg_pos_one);
-                        bloom_filter_2.read(reg_val_two, reg_pos_two);
+                        @atomic{
+                         bloom_filter_1.read(reg_val_one, reg_pos_one);
+                         bloom_filter_2.read(reg_val_two, reg_pos_two);
+                        }
                         // only allow flow to pass if both entries are set
                         if (reg_val_one != 1 || reg_val_two != 1){
                             drop();
@@ -221,8 +212,10 @@ control MyIngress(inout headers hdr,
                     }
                 } else { // Packet comes from external network, but port is not added to table
                         compute_hashes(hdr.ipv4.dstAddr, hdr.ipv4.srcAddr, hdr.tcp.dstPort, hdr.tcp.srcPort);
-                        bloom_filter_1.read(reg_val_one, reg_pos_one);
-                        bloom_filter_2.read(reg_val_two, reg_pos_two);
+                        @atomic{
+                          bloom_filter_1.read(reg_val_one, reg_pos_one);
+                          bloom_filter_2.read(reg_val_two, reg_pos_two);
+                        }
                         // only allow flow to pass if both entries are set
                         if (reg_val_one != 1 || reg_val_two != 1){
                             drop();
@@ -249,8 +242,8 @@ control MyEgress(inout headers hdr,
 
 control MyComputeChecksum(inout headers  hdr, inout metadata meta) {
      apply {
-          update_checksum(hdr.ipv4.isValid(),
-                        { hdr.ipv4.version, hdr.ipv4.diffserv, hdr.ipv4.totalLen, hdr.ipv4.identification, hdr.ipv4.fragOffset, hdr.ipv4.ttl, hdr.ipv4.protocol, hdr.ipv4.srcAddr, hdr.ipv4.dstAddr }, hdr.ipv4.hdrChecksum, HashAlgorithm.csum16);
+//          update_checksum(hdr.ipv4.isValid(),
+//                        { hdr.ipv4.versionihl, hdr.ipv4.diffserv, hdr.ipv4.totalLen, hdr.ipv4.identification, hdr.ipv4.fragOffset, hdr.ipv4.ttl, hdr.ipv4.protocol, hdr.ipv4.srcAddr, hdr.ipv4.dstAddr }, hdr.ipv4.hdrChecksum, HashAlgorithm.csum16);
     }
 }
 
