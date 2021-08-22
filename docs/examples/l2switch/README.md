@@ -22,7 +22,7 @@ Connect your laptop to the wireless access point called "p4pi". After that your 
 
 ### Step 2 - Test with the ping tool
 
-After connecting to the access point, you should be able to ping the IP assigned to br1 from your laptop.
+After connecting to the access point, you should be able to ping the IP assigned to br1 (br1 is inside netns gigport) from your laptop.
 
 ```bash
 ping 192.168.4.150
@@ -40,7 +40,7 @@ In this scenario, we simply add a table entry to table `smac` to drop packets co
 We first check the MAC address of br1. To this end, add the following command in the SSH terminal:
 
 ```bash
-ip addr show dev br1 | grep ether
+sudo ip netns exec gigport ip addr show dev br1 | grep ether
 ```
 
 Right after "link/ether" you should find the MAC address of br1.
@@ -62,7 +62,7 @@ te.insert
 As you can see this setup will drop all packets where the Ethernet source MAC is <mac address>. Replacing this with the MAC of br1, the ICMP Echo replies will be dropped. The P4Runtime shell can be left by the 'exit' command. In the SSH terminal, we can easily check what happens:
 
 ```bash
-sudo tcpdump -i br1 icmp
+sudo ip netns exec gigport tcpdump -i br1 icmp
 ```
 
 One can see that all the ICMP Echo requests arrive and replies are generated as previously, but they do not return back to the laptop. Running tcpdump on interface br0, we can see that the replies have gone, being removed by the T4P4S switch.
@@ -114,7 +114,7 @@ If you cannot access P4Pi through the management IP, the following trick can hel
 
 - Connect to the p4pi WiFi access point.
 - On your laptop, assign static IP 192.168.4.50/24 to the wireless interface.
-- Open a SSH connection to 192.168.4.101.
+- Open a SSH connection to 192.168.4.1.
 
 ## Functionalities to be added during the hackathon or later
 
