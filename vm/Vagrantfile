@@ -3,6 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "debian/bullseye64"
+  config.vm.define "p4pi"
 
   config.vm.network "public_network"
 
