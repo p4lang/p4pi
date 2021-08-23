@@ -7,7 +7,7 @@ import re
 
 from scapy.all import sendp, Packet, Ether, StrFixedLenField, XByteField, IntField, bind_layers
 
-DST_ADDR = "00:04:00:00:10:10"
+DST_ADDR = "10:04:00:00:10:10"
 
 
 class P4calc(Packet):
