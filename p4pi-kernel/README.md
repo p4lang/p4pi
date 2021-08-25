@@ -68,6 +68,7 @@ sed -i 's/# CONFIG_BINFMT_MISC.*/CONFIG_BINFMT_MISC=y/' .config
 sed -i 's/# CONFIG_IA32_EMULATION.*/CONFIG_IA32_EMULATION=y/' .config
 sed -i 's/# CONFIG_USERFAULTFD.*/CONFIG_USERFAULTFD=y/' .config
 sed -i 's/# CONFIG_MEM_SOFT_DIRTY.*/CONFIG_MEM_SOFT_DIRTY=y/' .config
+sed -i 's/# CONFIG_NET_CLS_BPF.*/CONFIG_NET_CLS_BPF=m/' .config
 ```
 
 ### Build deb packages
