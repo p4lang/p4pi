@@ -8,14 +8,14 @@ apt-get update
 apt-get --fix-broken install
 
 apt-fast install -o Dpkg::Options::="--force-overwrite" --allow-downgrades --fix-missing -y \
-	p4pi-linux-image-5.10.52-v8+ \
-	p4pi-linux-headers-5.10.52-v8+ \
+	p4pi-linux-image-5.10.60-v8+ \
+	p4pi-linux-headers-5.10.60-v8+ \
 	p4lang-pi \
 	p4lang-p4c \
 	p4lang-bmv2 \
 	p4pi-web
 
-mv /boot/vmlinuz-5.10.52-v8+ /boot/kernel8.img
+mv /boot/vmlinuz-5.10.60-v8+ /boot/kernel8.img
 
 # Enable web UI
 systemctl enable p4pi-web
