@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=debian:buster
+ARG BASE_IMAGE=docker.io/library/debian:buster
 FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND noninteractive
