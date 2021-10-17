@@ -51,26 +51,6 @@ sudo brctl addif br0 <eth0/wlan0> dtap0
 sudo ifconfig br0 up
 ```
 
-# Testing
-
-## Direct Ethernet connection
-Connect pi to pc with ethernet
-The pi should have something like `169.254.146.157/16` as ip(, assigned automatically without dhcp).
-
-Configure static ip in the same subnet for the pc and add manual arp entry for a non-existant destination
-
-```bash
-sudo ip ad add 169.254.146.158/16 dev <eno0>
-sudo arp -s 169.254.146.159 00:50:ba:85:85:ca
-```
-
-Start basic_mirror on the pi. On the pc run the iperf server and client(targeting the non-existant destination) as well
-eg:
-```bash
-iperf3 -s 169.254.146.158
-iperf3 -t 120 -c 169.254.146.159
-```
-
 ## Pi as WiFi AP
 
 [Based on this](https://www.raspberrypi.org/documentation/configuration/wireless/access-point-routed.md)
