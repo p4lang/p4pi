@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# https://www.debian.org/doc/debian-policy/ch-source.html#s-debianrules
+# https://manpages.debian.org/stretch/debhelper/debhelper.7.en.html
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+version := $(shell dpkg-parsechangelog -S Version | sed -rne 's,([^-\+]+)+(\+dfsg)*.*,\1,p'i)
+source := $(shell dpkg-parsechangelog -S Source)
+upstreampck := $(source)_$(version).orig.tar.gz
+
+%:
+	dh $@ --with python3
+
+clean:
+	@ echo CLEAN
+	rm -f ../$(upstreampck)
+	tar czf ../$(upstreampck) --exclude=debian --exclude=.pc .
+	dh_testdir
+	dh_auto_clean
+	dh_clean
+
+override_dh_auto_configure:
+	dh_auto_configure -- --with-proto --with-cli
+
+override_dh_auto_build:
+	$(MAKE) all
+
+override_dh_auto_install:
+	dh_auto_install -- DESTDIR=$(CURDIR)/debian/p4lang-pi install
+	find $(CURDIR)/debian/p4lang-pi -name "*.pyc" | xargs rm -f
+	find $(CURDIR)/debian/p4lang-pi -name "*.pyo" | xargs rm -f

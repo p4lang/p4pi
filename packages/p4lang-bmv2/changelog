@@ -1,0 +1,24 @@
+p4lang-bmv2 (1.14.0-4) bullseye; urgency=medium
+
+  * Fix uninitialized build warning
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 04 Nov 2021 08:09:03 +0000
+
+p4lang-bmv2 (1.14.0-3) bullseye; urgency=medium
+
+  * Update to commit 98d6075
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 04 Nov 2021 06:05:49 +0000
+
+p4lang-bmv2 (1.14.0-2) bullseye; urgency=medium
+
+  * Update to commit fc54206
+  * Drop libJudy dependency
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Fri, 22 Oct 2021 20:22:41 +0100
+
+p4lang-bmv2 (1.14.0-1) bullseye; urgency=medium
+
+  * Self-made package
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 07 Oct 2021 00:19:20 +0100

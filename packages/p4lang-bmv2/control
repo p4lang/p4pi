@@ -1,0 +1,75 @@
+Source: p4lang-bmv2
+Section: net
+Priority: optional
+Maintainer: Radostin Stoyanov <radostin@stoyanov.io>
+Build-Depends:
+    automake,
+    build-essential,
+    cmake,
+    curl,
+    debhelper (>= 12),
+    dh-python,
+    git,
+    g++,
+    gfortran | gfortran-10,
+    libboost-dev,
+    libboost-filesystem-dev,
+    libboost-program-options-dev,
+    libboost-system-dev,
+    libboost-thread-dev,
+    libgmp-dev,
+    libgrpc++-dev,
+    libgrpc-dev,
+    libopenmpi-dev,
+    libnanomsg-dev,
+    libpcap-dev,
+    libprotobuf-dev,
+    libprotoc-dev,
+    libssl-dev,
+    libthrift | libthrift-0.11.0 | libthrift-0.13.0,
+    libthrift-dev,
+    libtool,
+    pkg-config,
+    protobuf-compiler,
+    protobuf-compiler-grpc,
+    python3,
+    python3-six,
+    python-thrift | python3-thrift | python3-thriftpy,
+    thrift-compiler,
+    libreadline-dev,
+    p4lang-pi
+Standards-Version: 4.1.5
+Rules-Requires-Root: no
+Homepage: https://github.com/p4lang/behavioral-model
+Vcs-Git: https://github.com/p4lang/behavioral-model
+Vcs-Browser: https://github.com/p4lang/behavioral-model
+
+Package: p4lang-bmv2
+Architecture: amd64 arm64
+Depends:
+    libboost-dev,
+    libboost-filesystem-dev,
+    libboost-program-options-dev,
+    libboost-system-dev,
+    libboost-thread-dev,
+    libgmp-dev,
+    libgrpc++-dev,
+    libgrpc-dev,
+    libnanomsg-dev,
+    libpcap-dev,
+    libprotobuf-dev,
+    libprotoc-dev,
+    libssl-dev,
+    libthrift | libthrift-0.11.0 | libthrift-0.13.0,
+    libthrift-dev,
+    libtool,
+    pkg-config,
+    protobuf-compiler,
+    protobuf-compiler-grpc,
+    python3,
+    python-thrift | python3-thrift | python3-thriftpy,
+    thrift-compiler,
+    ${misc:Depends},
+    ${shlibs:Depends}
+Description: P4 behavioral-model
+ The reference P4 software switch.
