@@ -1,0 +1,45 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# https://www.debian.org/doc/debian-policy/ch-source.html#s-debianrules
+# https://manpages.debian.org/stretch/debhelper/debhelper.7.en.html
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+version := $(shell dpkg-parsechangelog -S Version | sed -rne 's,([^-\+]+)+(\+dfsg)*.*,\1,p'i)
+source := $(shell dpkg-parsechangelog -S Source)
+upstreampck := $(source)_$(version).orig.tar.gz
+
+clean:
+	@ echo CLEAN
+	rm -f ../$(upstreampck)
+	tar czf ../$(upstreampck) --exclude=debian --exclude=.pc .
+	dh_testdir
+	dh_auto_clean
+	dh_clean
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure --builddirectory=build/ -- \
+		-DCMAKE_BUILD_TYPE=RELEASE \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DENABLE_BMV2=ON \
+		-DENABLE_EBPF=ON \
+		-DENABLE_UBPF=ON \
+		-DENABLE_DPDK=ON \
+		-DENABLE_P4C_GRAPHS=ON \
+		-DENABLE_P4TEST=ON \
+		-DENABLE_DOCS=OFF \
+		-DENABLE_GC=ON \
+		-DENABLE_GTESTS=OFF \
+		-DENABLE_PROTOBUF_STATIC=ON \
+		-DENABLE_MULTITHREAD=OFF \
+		-DENABLE_GMP=ON
+
+
+override_dh_auto_install:
+	dh_auto_install --builddirectory=build/ -- DESTDIR=$(CURDIR)/debian/p4lang-p4c install

@@ -1,0 +1,24 @@
+p4lang-pi (0.1.0-7) bullseye; urgency=medium
+
+  * Update package format 
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 04 Nov 2021 04:44:11 +0000
+
+p4lang-pi (0.1.0-6) bullseye; urgency=medium
+
+  * Update to commit 66da143
+  * Remove libJudy dependency
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Sat, 09 Oct 2021 10:44:16 +0100
+
+p4lang-pi (0.1.0-5) bullseye; urgency=medium
+
+  * Update to commit a5fd855
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Sun, 03 Oct 2021 00:35:59 +0100
+
+p4lang-pi (0.1.0-4) bullseye; urgency=low
+
+  * Self-made package
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Sun, 20 Jun 2021 22:54:44 +0100

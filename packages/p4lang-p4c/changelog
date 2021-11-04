@@ -1,0 +1,30 @@
+p4lang-p4c (1.2.2-5) bullseye; urgency=medium
+
+  * Add libbpf-dev dependency
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 04 Nov 2021 04:26:53 +0000
+
+p4lang-p4c (1.2.2-4) bullseye; urgency=medium
+
+  * Update to commit 61d1bb737
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Tue, 02 Nov 2021 19:19:42 +0000
+
+p4lang-p4c (1.2.2-3) bullseye; urgency=medium
+
+  * Update to commit 063bf646b
+  * Add gfortran-10 dependency needed by libopenmpi-dev
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Mon, 01 Nov 2021 03:09:38 +0000
+
+p4lang-p4c (1.2.2-2) bullseye; urgency=medium
+
+  * Update to commit 7169708
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Fri, 08 Oct 2021 19:52:28 +0100
+
+p4lang-p4c (1.2.2-1) bullseye; urgency=low
+
+  * Self-made package
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 22 Jul 2021 00:45:06 +0100
