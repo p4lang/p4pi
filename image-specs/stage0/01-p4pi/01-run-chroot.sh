@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 # Add P4Pi packages repository: https://build.opensuse.org/project/show/home:rstoyanov
-echo 'deb http://download.opensuse.org/repositories/home:/rstoyanov/Debian_Testing/ /' | tee /etc/apt/sources.list.d/home:rstoyanov.list
-curl -fsSL https://download.opensuse.org/repositories/home:rstoyanov/Debian_Testing/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_rstoyanov.gpg > /dev/null
+echo 'deb http://download.opensuse.org/repositories/home:/rstoyanov/Debian_11/ /' | tee /etc/apt/sources.list.d/home:rstoyanov.list
+curl -fsSL https://download.opensuse.org/repositories/home:rstoyanov/Debian_11/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_rstoyanov.gpg > /dev/null
 apt-get update
 
 apt-get --fix-broken install
