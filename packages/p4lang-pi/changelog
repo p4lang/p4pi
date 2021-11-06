@@ -1,3 +1,10 @@
+p4lang-pi (0.1.0-8) bullseye; urgency=medium
+
+  * Add python3 dependencies
+  * Set standards version to 4.5.0
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Sat, 06 Nov 2021 21:12:21 +0000
+
 p4lang-pi (0.1.0-7) bullseye; urgency=medium
 
   * Update package format 

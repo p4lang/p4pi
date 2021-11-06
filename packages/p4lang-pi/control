@@ -22,9 +22,9 @@ Build-Depends:
     pkg-config,
     protobuf-compiler,
     protobuf-compiler-grpc,
-    python3,
+    python3-all,
     valgrind
-Standards-Version: 4.5.1.0
+Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://github.com/p4lang/PI
 Vcs-Git: https://github.com/p4lang/PI
@@ -35,6 +35,7 @@ Architecture: amd64 arm64
 Depends:
     ${shlibs:Depends},
     ${misc:Depends},
+    ${python3:Depends},
     libboost-dev,
     libboost-system-dev,
     libboost-thread-dev,
