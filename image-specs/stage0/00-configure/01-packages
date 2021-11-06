@@ -157,7 +157,6 @@ python3-wheel
 raspberrypi-bootloader
 raspberrypi-net-mods
 raspi-config
-raspi-firmware
 raspinfo
 rng-tools
 rpi-eeprom
