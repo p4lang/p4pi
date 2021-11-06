@@ -199,7 +199,7 @@ export IMG_FILENAME="${IMG_FILENAME:-"${IMG_NAME}-${IMG_DATE}-${GIT_HASH}"}"
 export ZIP_FILENAME="${ZIP_FILENAME:-"${IMG_NAME}-image-${IMG_DATE}-${GIT_HASH}"}"
 
 export SCRIPT_DIR="${BASE_DIR}/scripts"
-export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}"
+export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/${IMG_NAME}"}"
 export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
 export DEPLOY_XZ="${DEPLOY_XZ:-0}"
 export DEPLOY_ZIP="${DEPLOY_ZIP:-1}"
