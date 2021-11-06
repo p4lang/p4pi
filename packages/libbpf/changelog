@@ -1,0 +1,92 @@
+libbpf (0.5.0-1) focal; urgency=medium
+
+  * Ubuntu 20.04 package
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Thu, 04 Nov 2021 03:56:20 +0000
+
+libbpf (0.5.0-1) unstable; urgency=medium
+
+  * New upstream version 0.5.0
+    - Update copyright.
+    - Update symbols.
+  * Update Standards-Version to 4.6.0.1
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Fri, 17 Sep 2021 22:32:53 +0100
+
+libbpf (0.4.0-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Tue, 17 Aug 2021 22:12:29 +0100
+
+libbpf (0.4.0-1) experimental; urgency=medium
+
+  * New upstream version 0.4.0
+    - Update symbols.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Tue, 25 May 2021 22:05:09 +0100
+
+libbpf (0.3-2) unstable; urgency=medium
+
+  [ Luca Boccassi ]
+  * Add build-dependency on zlib1g-dev
+  * Use pkg-config to get build flags
+  * Enable verbose builds unless 'terse' DEB_BUILD_OPTIONS is set
+  * Have libbpf-dev depend on libelf-dev and zlib1g-dev
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 10 Jan 2021 17:43:30 +0000
+
+libbpf (0.3-1) unstable; urgency=medium
+
+  * New upstream version 0.3 (Closes: #979166)
+    - Update symbols file.
+  * Update Standards-Version to 4.5.1
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 03 Jan 2021 23:27:11 +0000
+
+libbpf (0.2-1) unstable; urgency=medium
+
+  * New upstream version 0.2
+    - Update symbols file.
+    - Update copyright for removed file.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Thu, 29 Oct 2020 23:07:35 +0000
+
+libbpf (0.1.1-1) unstable; urgency=medium
+
+  * Update from upstream v0.1.1
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sat, 26 Sep 2020 23:17:58 +0100
+
+libbpf (0.1.0-1) unstable; urgency=medium
+
+  * Update from upstream v0.1.0
+    - Update symbols file.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Wed, 26 Aug 2020 22:40:21 +0100
+
+libbpf (0.0.9-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Sudip Mukherjee ]
+  * Update from upstream v0.0.9
+    - Update symbols file.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Thu, 23 Jul 2020 18:35:16 +0100
+
+libbpf (0.0.8-1) unstable; urgency=medium
+
+  * Update from upstream v0.0.8
+  * Update symbols file.
+  * Update compat level to 13.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Fri, 01 May 2020 09:44:49 +0100
+
+libbpf (0.0.6-1) unstable; urgency=medium
+
+  * Package from github. (Closes: #948041)
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sat, 11 Apr 2020 16:12:37 +0100

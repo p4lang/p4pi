@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CFLAGS_MAINT_APPEND  = -Werror=implicit-function-declaration
+include /usr/share/dpkg/pkg-info.mk
+include /usr/share/dpkg/architecture.mk
+
+ifeq (,$(findstring terse,$(DEB_BUILD_OPTIONS)))
+        VERBOSE=1
+endif
+
+%:
+	dh $@ --sourcedirectory=src
+
+override_dh_gencontrol:
+	dh_gencontrol -- -v1:$(DEB_VERSION)
+
+override_dh_makeshlibs:
+	dh_makeshlibs -- -v1:$(DEB_VERSION)
+
+override_dh_auto_build:
+	dh_auto_build -- LIBSUBDIR=lib/$(DEB_HOST_MULTIARCH) V=$(VERBOSE)
+
+override_dh_auto_install:
+	dh_auto_install -- LIBSUBDIR=lib/$(DEB_HOST_MULTIARCH) V=$(VERBOSE)
