@@ -1,0 +1,29 @@
+Source: libbpf
+Priority: optional
+Maintainer: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
+Build-Depends: debhelper-compat (= 12), libelf-dev, zlib1g-dev, pkg-config
+Standards-Version: 4.6.0.1
+Section: libs
+Vcs-Browser: https://github.com/sudipm-mukherjee/libbpf
+Vcs-Git: https://github.com/sudipm-mukherjee/libbpf.git
+
+Package: libbpf-dev
+Section: libdevel
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${misc:Depends}, libbpf0 (= ${binary:Version}), libelf-dev, zlib1g-dev
+Description: eBPF helper library (development files)
+ libbpf is a library for loading eBPF programs and reading and
+ manipulating eBPF objects from user-space.
+ .
+ This package is needed to compile programs against libbpf.
+
+Package: libbpf0
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: eBPF helper library (shared library)
+ libbpf is a library for loading eBPF programs and reading and
+ manipulating eBPF objects from user-space.
+ .
+ This package contains the shared library.

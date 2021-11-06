@@ -1,0 +1,145 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: libbpf
+Source: https://github.com/libbpf/libbpf
+
+Files:     *
+Copyright: 2013-2015 Alexei Starovoitov <ast@kernel.org>
+           2015 Wang Nan <wangnan0@huawei.com>
+           2015 Huawei Inc.
+           2018, 2019 Facebook
+           2017 Nicira, Inc.
+           2019 Isovalent, Inc.
+           2019 Netronome Systems, Inc.
+           2003-2013 Thomas Graf <tgraf@suug.ch>
+           2018-2019 Intel Corporation.
+License:   LGPL-2.1 or BSD-2-Clause
+
+Files:     docs/conf.py
+Copyright: Grant Seltzer <grantseltzer@gmail.com>
+License:   GPL-2.0
+
+Files:     include/uapi/linux/bpf.h
+           include/uapi/linux/bpf_common.h
+           include/uapi/linux/btf.h
+           include/uapi/linux/if_link.h
+           include/uapi/linux/if_xdp.h
+           include/uapi/linux/netlink.h
+Copyright: 2011-2014 PLUMgrid, http://plumgrid.com
+           2018 Facebook
+           2018 Intel Corporation.
+License:   GPL-2 with Linux-syscall-note exception
+
+Files:     debian/*
+Copyright: 2018 Ben Hutchings <ben@decadent.org.uk>
+           2018 Hilko Bengen <bengen@debian.org>
+           2018 Luca Boccassi <bluca@debian.org>
+           2020 Sudip Mukherjee <sudipm.mukherjee@gmail.com>
+License:   GPL-2+
+
+License:   GPL-2.0
+ This program is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public
+ License version 2 as published by the Free Software
+ Foundation.
+ .
+ This program is distributed in the hope that it will be
+ useful, but WITHOUT ANY WARRANTY; without even the implied
+ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU General Public
+ License along with this package; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA 02110-1301 USA
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+
+License:   GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <https://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License:   LGPL-2.1
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation;
+ version 2.1 of the License (not later!)
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not,  see <http://www.gnu.org/licenses>
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public License
+ Version 2.1 can be found in `/usr/share/common-licenses/LGPL-2.1'.
+
+License:   BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+License:   GPL-2 with Linux-syscall-note exception
+ NOTE! This copyright does *not* cover user programs that use kernel services
+ by normal system calls - this is merely considered normal use of the kernel,
+ and does *not* fall under the heading of "derived work". Also note that the
+ GPL below is copyrighted by the Free Software Foundation, but the instance of
+ code that it refers to (the Linux kernel) is copyrighted by me and others who
+ actually wrote it.
+ .
+ Also note that the only valid version of the GPL as far as the kernel is
+ concerned is _this_ particular version of the license (ie v2, not v2.2 or v3.x
+ or whatever), unless explicitly otherwise stated.
+ .
+ Linus Torvalds
+ .
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 of the License.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+ .
+ On Debian and systems the full text of the GNU General Public
+ License version 2 can be found in the file
+ "/usr/share/common-licenses/GPL-2".
