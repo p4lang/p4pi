@@ -1,3 +1,11 @@
+p4lang-p4c (1.2.2-6) bullseye; urgency=medium
+
+  * Update to commit 6c23bf3e6
+  * Add python3 dependencies
+  * Set standards version to 4.5.0
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Sat, 06 Nov 2021 22:02:45 +0000
+
 p4lang-p4c (1.2.2-5) bullseye; urgency=medium
 
   * Add libbpf-dev dependency

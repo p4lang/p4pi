@@ -32,13 +32,13 @@ Build-Depends:
     pkg-config,
     protobuf-compiler,
     protobuf-compiler-grpc,
-    python3,
+    python3-all,
     python3-six,
     python-thrift | python3-thrift | python3-thriftpy,
     thrift-compiler,
     libreadline-dev,
     p4lang-pi
-Standards-Version: 4.1.5
+Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://github.com/p4lang/behavioral-model
 Vcs-Git: https://github.com/p4lang/behavioral-model
@@ -47,6 +47,9 @@ Vcs-Browser: https://github.com/p4lang/behavioral-model
 Package: p4lang-bmv2
 Architecture: amd64 arm64
 Depends:
+    ${shlibs:Depends},
+    ${misc:Depends},
+    ${python3:Depends},
     libboost-dev,
     libboost-filesystem-dev,
     libboost-program-options-dev,
@@ -66,10 +69,8 @@ Depends:
     pkg-config,
     protobuf-compiler,
     protobuf-compiler-grpc,
-    python3,
     python-thrift | python3-thrift | python3-thriftpy,
     thrift-compiler,
-    ${misc:Depends},
-    ${shlibs:Depends}
+    p4lang-pi
 Description: P4 behavioral-model
  The reference P4 software switch.

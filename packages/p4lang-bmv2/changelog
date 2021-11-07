@@ -1,3 +1,11 @@
+p4lang-bmv2 (1.14.0-5) bullseye; urgency=medium
+
+  * Add python3 dependencies
+  * Set standards version to 4.5.0
+  * Enable compile-time performance optimizations
+
+ -- Radostin Stoyanov <radostin@stoyanov.io>  Sat, 06 Nov 2021 21:41:05 +0000
+
 p4lang-bmv2 (1.14.0-4) bullseye; urgency=medium
 
   * Fix uninitialized build warning

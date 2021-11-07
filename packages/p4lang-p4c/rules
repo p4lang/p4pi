@@ -12,6 +12,9 @@ version := $(shell dpkg-parsechangelog -S Version | sed -rne 's,([^-\+]+)+(\+dfs
 source := $(shell dpkg-parsechangelog -S Source)
 upstreampck := $(source)_$(version).orig.tar.gz
 
+%:
+	dh $@ --with python3
+
 clean:
 	@ echo CLEAN
 	rm -f ../$(upstreampck)
@@ -19,9 +22,6 @@ clean:
 	dh_testdir
 	dh_auto_clean
 	dh_clean
-
-%:
-	dh $@
 
 override_dh_auto_configure:
 	dh_auto_configure --builddirectory=build/ -- \
