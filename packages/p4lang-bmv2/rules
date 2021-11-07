@@ -27,12 +27,12 @@ clean:
 	dh_clean
 
 override_dh_auto_configure:
-	dh_auto_configure -- --with-pdfixed --with-thrift --with-nanomsg --with-pi --disable-logging-macros --disable-elogger
+	dh_auto_configure -- --with-pdfixed --with-thrift --with-nanomsg --with-pi
 
 override_dh_auto_install:
 	make DESTDIR=$(CURDIR)/debian/p4lang-bmv2 install
 	autoreconf -fi targets/simple_switch_grpc/
-	cd targets/simple_switch_grpc/ && ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --disable-maintainer-mode --disable-dependency-tracking --with-thrift --disable-logging-macros --disable-elogger
+	cd targets/simple_switch_grpc/ && ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --disable-maintainer-mode --disable-dependency-tracking --with-thrift
 	make -C targets/simple_switch_grpc/ -j$(nproc)
 	make -C targets/simple_switch_grpc/ DESTDIR=$(CURDIR)/debian/p4lang-bmv2 install
 	find $(CURDIR)/debian/p4lang-bmv2 -name __pycache__ -type d | xargs rm -rf
