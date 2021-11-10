@@ -10,6 +10,7 @@ apt-get --fix-broken install
 apt-fast install -o Dpkg::Options::="--force-overwrite" --allow-downgrades --fix-missing -y \
 	p4pi-linux-image-5.10.60-v8+ \
 	p4pi-linux-headers-5.10.60-v8+ \
+	p4pi-examples \
 	p4lang-pi \
 	p4lang-p4c \
 	p4lang-bmv2 \
