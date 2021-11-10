@@ -1,0 +1,16 @@
+Source: p4pi-examples
+Section: devel
+Priority: optional
+Maintainer: Radostin Stoyanov <radostin@stoyanov.io>
+Uploaders: Radostin Stoyanov <radostin@stoyanov.io>
+Build-Depends: debhelper
+Homepage: https://github.com/p4lang/p4pi
+Vcs-Git: https://github.com/p4lang/p4pi.git
+Vcs-Browser: https://github.com/p4lang/p4pi
+Standards-Version: 4.5.1
+Rules-Requires-Root: no
+
+Package: p4pi-examples
+Architecture: all
+Description: P4Pi Examples
+ P4 examples for P4Pi
