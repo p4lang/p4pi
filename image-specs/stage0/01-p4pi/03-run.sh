@@ -18,4 +18,7 @@ mkdir -p /home/pi/jupyter
 # Install Jupyter
 pip3 install jupyterlab
 
+# Start Jupyter on boot
+systemctl enable jupyter.service
+
 EOF
