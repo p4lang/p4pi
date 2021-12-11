@@ -3,7 +3,7 @@
 In this example, we use the P4Pi setup as depicted in the following figure:
 
 <p align="center">
-  <img alt="P4Pi Setup" width="600px" src="../../images/l2switch_setupA.png">
+  <img alt="P4Pi Setup" width="600px" src="../../../docs/images/l2switch_setupA.png">
 </p>
 
 The P4 program can parse Ethernet, ARP, IPv4 and ICMP (Echo-request) headers. The pipeline consists of two tables implementing the ARP responder and ICMP Echo responder functions.
