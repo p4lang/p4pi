@@ -26,7 +26,7 @@ We use blocklisting, which involves defining which entities should be blocked. S
 The following figure depicts the default setup of a P4Pi node:
 
 <p align="center">
-  <img alt="Default settings of P4Pi" width="600px" src="../../images/l2switch_setupA.png">
+  <img alt="Default settings of P4Pi" width="600px" src="../../../docs/images/l2switch_setupA.png">
 </p>
 
 For more detailed information check the [Simple L2 Switch example](../l2switch/README.md#testing-with-wifi-access-only)
@@ -122,7 +122,7 @@ te.insert
 The following figure depicts another setup where P4Pi node acts as a low level relay or proxy between your laptop and your home router (or a private network) connected to the 1GE wired Ethernet port.
 
 <p align="center">
-  <img alt="Low level gateway mode of P4Pi" width="900px" src="../../images/l2switch_setupB.png">
+  <img alt="Low level gateway mode of P4Pi" width="900px" src="../../../docs/images/l2switch_setupB.png">
 </p>
 
 ### Step 1 - Connect to P4Pi

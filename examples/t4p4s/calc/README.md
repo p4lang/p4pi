@@ -3,7 +3,7 @@
 In this example, we use the default settings of P4Pi as depicted in the following figure:
 
 <p align="center">
-  <img alt="Default settings of P4Pi" width="600px" src="../../images/l2switch_setupA.png">
+  <img alt="Default settings of P4Pi" width="600px" src="../../../docs/images/l2switch_setupA.png">
 </p>
 
 This example is based on the P4 tutorial exercise called [calc](https://github.com/p4lang/tutorials/tree/master/exercises/calc).

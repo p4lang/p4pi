@@ -18,7 +18,7 @@ If the packet comes from the external network, we compute the same hash `index=h
 The following figure illustrates the setup of a P4Pi node:
 
 <p align="center">
-  <img alt="Default settings of P4Pi" width="600px" src="../../images/l2switch_setupA.png">
+  <img alt="Default settings of P4Pi" width="600px" src="../../../docs/images/l2switch_setupA.png">
 </p>
 
 For more detailed information check the [Simple L2 Switch example](../l2switch/README.md)
@@ -117,7 +117,7 @@ sudo ip netns exec gigport iperf -c xyz -t 60 -i 1 # Where xyz is your IP addres
 The following figure depicts another setup where P4Pi node acts as a low level relay or proxy between your laptop and your home router (or a private network) connected to the 1GE wired Ethernet port.
 
 <p align="center">
-  <img alt="Low level gateway mode of P4Pi" width="900px" src="../../images/l2switch_setupB.png">
+  <img alt="Low level gateway mode of P4Pi" width="900px" src="../../../docs/images/l2switch_setupB.png">
 </p>
 
 ### Step 1 - Connect to P4Pi
