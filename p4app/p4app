@@ -1,0 +1,187 @@
+#!/usr/bin/env bash
+# Copyright 2013-present Barefoot Networks, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+P4APP_IMAGE=${P4APP_IMAGE:-p4lang/p4app:latest}
+P4APP_CONTAINER_ARGS=${P4APP_CONTAINER_ARGS:-""}
+
+
+myrealpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+P4APP_LOGDIR=$(myrealpath "${P4APP_LOGDIR:-/tmp/p4app_logs}")
+
+
+function get_abs_filename() {
+  # Convert a possibly-relative path to an absolute path.
+  echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+}
+
+function normalize_path() {
+  # Remove any trailing slash from the provided path.
+  echo ${1%/}
+}
+
+function build-command {
+  if [ -z $2 ]; then
+      OUTPUT_FILE="out.json"
+  else
+      OUTPUT_FILE="$2"
+  fi
+
+  run-command $1 --build-only "${@:3}"
+  rc=$?
+
+  [ $rc -eq 0 ] && cp "$P4APP_LOGDIR/program.json" $OUTPUT_FILE
+
+  exit $rc
+}
+
+function run-p4app {
+  APP_TO_RUN=/tmp/app.tar.gz
+  P4APP_NAME=${P4APP_NAME:-"p4app_$RANDOM"}
+  docker run --privileged --interactive --tty --rm \
+            --name "$P4APP_NAME" \
+            -v $1:$APP_TO_RUN \
+            -v "$P4APP_LOGDIR":/tmp/p4app_logs \
+             $P4APP_CONTAINER_ARGS \
+             $P4APP_IMAGE $APP_TO_RUN "${@:2}"
+}
+
+function run-command {
+  # Run the .p4app package provided by the user.
+  if [ -d "$1" ]; then
+    # The user passed the package as a directory. Tar it up and pass it to the
+    # container.
+    PACKAGE_DIR=$(normalize_path "$1")
+    APP_FILE=$(mktemp /tmp/p4app.tar.gz.XXXXXX)
+    tar -czf "$APP_FILE" -C "$PACKAGE_DIR" .
+    run-p4app "$APP_FILE" "${@:2}"
+    rc=$?
+    rm "$APP_FILE"
+  elif [ -f "$1" ]; then
+    # The user passed the package as a file. We'll assume it's already a .tar.gz
+    # archive; just pass it to the container as-is.
+    APP_FILE=$(get_abs_filename "$1")
+    run-p4app "$APP_FILE" "${@:2}"
+    rc=$?
+  else
+    echo "Couldn't read p4app package: $1"
+    exit 1
+  fi
+  return $rc
+}
+
+function pack-command {
+  # Compress the provided .p4app package.
+  if [ -d "$1" ]; then
+    # The user passed the package as a directory. Tar it up.
+    PACKAGE_DIR=$(normalize_path "$1")
+    APP_FILE=$(mktemp /tmp/p4app.tar.gz.XXXXXX)
+    tar -czf "$APP_FILE" -C "$PACKAGE_DIR" . &&
+      rm -rf "$PACKAGE_DIR"
+      mv "$APP_FILE" "$PACKAGE_DIR"
+  elif [ -f "$1" ]; then
+    # The user passed the package as a file. We'll assume it's already a .tar.gz
+    # archive and leave it alone so that this command is idempotent.
+    echo "Package is already packed: $1"
+  else
+    echo "Couldn't read p4app package: $1"
+    exit 1
+  fi
+}
+
+function unpack-command {
+  # Decompress the provided .p4app package.
+  if [ -d "$1" ]; then
+    # The user passed the package as a directory. We'll leave it alone so that
+    # this command is idempotent.
+    echo "Package is already unpacked: $1"
+  elif [ -f "$1" ]; then
+    # The user passed the package as a file. Extract it.
+    APP_FILE=$(mktemp /tmp/p4app.tar.gz.XXXXXX)
+    mv "$1" "$APP_FILE" &&
+      mkdir -p "$1" &&
+      tar -xzf "$APP_FILE" -C "$1" &&
+      rm "$APP_FILE"
+  else
+    echo "Couldn't read p4app package: $1"
+    exit 1
+  fi
+}
+
+function update-command {
+  docker pull $P4APP_IMAGE
+}
+
+function exec-command {
+  container_id=${P4APP_NAME:-$(docker ps | grep -m1 p4app_ | awk '{print $1}')}
+
+  if [ -z "$container_id" ]; then
+      (>&2 echo "Couldn't find any p4app currently running.")
+      exit 1
+  fi
+
+  if [ -t 1 ]; then
+      # Called from a terminal, be interactive
+      docker exec -it $container_id ${@:1}
+  else
+      # Inside a pipe, don't allocate a ptty
+      docker exec $container_id ${@:1}
+  fi
+}
+
+function usage-command {
+  echo "Usage:"
+  echo "  p4app run <program.p4app>"
+  echo "      Run a p4app."
+  echo "  p4app run <program.p4app> <target>"
+  echo "      Run a p4app, specifying a target."
+  echo "  p4app build <program.p4app> <out.json>"
+  echo "      Build a p4app, specifying the output JSON filename."
+  echo "  p4app pack <program.p4app>"
+  echo "      Compress a p4app directory into a single file, in-place."
+  echo "  p4app unpack <program.p4app>"
+  echo "      Expand a p4app file into a directory, in-place."
+  echo "  p4app update"
+  echo "      Update the toolchain to the newest version."
+  echo "  p4app exec <command>"
+  echo "      Execute a command on the most recent p4app instance."
+  exit 1
+}
+
+case "$1" in
+  "run")
+    run-command "${@:2}"
+    ;;
+  "build")
+    build-command "${@:2}"
+    ;;
+  "pack")
+    pack-command "${@:2}"
+    ;;
+  "unpack")
+    unpack-command "${@:2}"
+    ;;
+  "update")
+    update-command "${@:2}"
+    ;;
+  "exec")
+    exec-command "${@:2}"
+    ;;
+  *)
+    usage-command
+    ;;
+esac

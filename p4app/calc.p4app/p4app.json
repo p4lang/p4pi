@@ -1,0 +1,15 @@
+{
+  "program": "p4src/calc.p4",
+  "language": "p4-16",
+  "targets": {
+      "custom": {
+	       "program": "topo.py"
+      },
+       "after": {
+           "cmd": [
+               "sudo mn -c",
+              " killall lt-simple_switch"
+            ]
+        }
+  }
+}
