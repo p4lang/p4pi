@@ -10,7 +10,7 @@ python-versions = ">=3.6"
 typing-extensions = {version = "*", markers = "python_version < \"3.8\""}
 
 [package.extras]
-tests = ["pytest", "pytest-asyncio", "mypy (>=0.800)"]
+tests = ["mypy (>=0.800)", "pytest-asyncio", "pytest"]
 
 [[package]]
 name = "attrs"
@@ -21,10 +21,10 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [package.extras]
-dev = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "zope.interface", "furo", "sphinx", "sphinx-notfound-page", "pre-commit"]
-docs = ["furo", "sphinx", "zope.interface", "sphinx-notfound-page"]
-tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "zope.interface"]
-tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins"]
+tests_no_zope = ["pytest-mypy-plugins", "mypy", "six", "pytest (>=4.3.0)", "pympler", "hypothesis", "coverage[toml] (>=5.0.2)"]
+tests = ["zope.interface", "pytest-mypy-plugins", "mypy", "six", "pytest (>=4.3.0)", "pympler", "hypothesis", "coverage[toml] (>=5.0.2)"]
+docs = ["sphinx-notfound-page", "zope.interface", "sphinx", "furo"]
+dev = ["pre-commit", "sphinx-notfound-page", "sphinx", "furo", "zope.interface", "pytest-mypy-plugins", "mypy", "six", "pytest (>=4.3.0)", "pympler", "hypothesis", "coverage[toml] (>=5.0.2)"]
 
 [[package]]
 name = "autobahn"
@@ -40,16 +40,16 @@ hyperlink = ">=21.0.0"
 txaio = ">=21.2.1"
 
 [package.extras]
-accelerate = ["wsaccel (>=0.6.3)"]
-all = ["zope.interface (>=5.2.0)", "twisted (>=20.3.0)", "attrs (>=20.3.0)", "wsaccel (>=0.6.3)", "python-snappy (>=0.6.0)", "msgpack (>=1.0.2)", "ujson (>=4.0.2)", "cbor2 (>=5.2.0)", "cbor (>=1.0.0)", "py-ubjson (>=0.16.1)", "flatbuffers (>=1.12)", "pyopenssl (>=20.0.1)", "service-identity (>=18.1.0)", "pynacl (>=1.4.0)", "pytrie (>=0.4.0)", "pyqrcode (>=1.2.1)", "cffi (>=1.14.5)", "argon2-cffi (>=20.1.0)", "passlib (>=1.7.4)", "xbr (>=21.2.1)", "zlmdb (>=21.2.1)", "web3 (>=5.16.0)", "jinja2 (>=2.11.3)", "rlp (>=2.0.1)", "py-eth-sig-utils (>=0.4.0)", "py-ecc (>=5.1.0)", "eth-abi (>=2.1.1)", "mnemonic (>=0.19)", "base58 (>=2.1.0)", "ecdsa (>=0.16.1)", "py-multihash (>=2.0.1)"]
-compress = ["python-snappy (>=0.6.0)"]
-dev = ["pep8-naming (>=0.3.3)", "flake8 (>=2.5.1)", "pyflakes (>=1.0.0)", "pytest (>=2.8.6,<3.3.0)", "twine (>=1.6.5)", "sphinx (>=1.2.3)", "sphinxcontrib-images (>=0.9.2)", "pyenchant (>=1.6.6)", "sphinxcontrib-spelling (>=2.1.2)", "sphinx-rtd-theme (>=0.1.9)", "awscli", "qualname", "passlib", "wheel", "pytest-asyncio (<0.6)", "pytest-aiohttp"]
-encryption = ["pyopenssl (>=20.0.1)", "service-identity (>=18.1.0)", "pynacl (>=1.4.0)", "pytrie (>=0.4.0)", "pyqrcode (>=1.2.1)"]
+xbr = ["py-multihash (>=2.0.1)", "ecdsa (>=0.16.1)", "base58 (>=2.1.0)", "mnemonic (>=0.19)", "eth-abi (>=2.1.1)", "py-ecc (>=5.1.0)", "py-eth-sig-utils (>=0.4.0)", "rlp (>=2.0.1)", "jinja2 (>=2.11.3)", "web3 (>=5.16.0)", "twisted (>=20.3.0)", "zlmdb (>=21.2.1)", "cbor2 (>=5.2.0)", "xbr (>=21.2.1)"]
+twisted = ["attrs (>=20.3.0)", "twisted (>=20.3.0)", "zope.interface (>=5.2.0)"]
+serialization = ["flatbuffers (>=1.12)", "py-ubjson (>=0.16.1)", "cbor (>=1.0.0)", "cbor2 (>=5.2.0)", "ujson (>=4.0.2)", "msgpack (>=1.0.2)"]
+scram = ["passlib (>=1.7.4)", "argon2-cffi (>=20.1.0)", "cffi (>=1.14.5)"]
 nvx = ["cffi (>=1.14.5)"]
-scram = ["cffi (>=1.14.5)", "argon2-cffi (>=20.1.0)", "passlib (>=1.7.4)"]
-serialization = ["msgpack (>=1.0.2)", "ujson (>=4.0.2)", "cbor2 (>=5.2.0)", "cbor (>=1.0.0)", "py-ubjson (>=0.16.1)", "flatbuffers (>=1.12)"]
-twisted = ["zope.interface (>=5.2.0)", "twisted (>=20.3.0)", "attrs (>=20.3.0)"]
-xbr = ["xbr (>=21.2.1)", "cbor2 (>=5.2.0)", "zlmdb (>=21.2.1)", "twisted (>=20.3.0)", "web3 (>=5.16.0)", "jinja2 (>=2.11.3)", "rlp (>=2.0.1)", "py-eth-sig-utils (>=0.4.0)", "py-ecc (>=5.1.0)", "eth-abi (>=2.1.1)", "mnemonic (>=0.19)", "base58 (>=2.1.0)", "ecdsa (>=0.16.1)", "py-multihash (>=2.0.1)"]
+encryption = ["pyqrcode (>=1.2.1)", "pytrie (>=0.4.0)", "pynacl (>=1.4.0)", "service-identity (>=18.1.0)", "pyopenssl (>=20.0.1)"]
+dev = ["pytest-aiohttp", "pytest-asyncio (<0.6)", "wheel", "passlib", "qualname", "awscli", "sphinx-rtd-theme (>=0.1.9)", "sphinxcontrib-spelling (>=2.1.2)", "pyenchant (>=1.6.6)", "sphinxcontrib-images (>=0.9.2)", "sphinx (>=1.2.3)", "twine (>=1.6.5)", "pytest (>=2.8.6,<3.3.0)", "pyflakes (>=1.0.0)", "flake8 (>=2.5.1)", "pep8-naming (>=0.3.3)"]
+compress = ["python-snappy (>=0.6.0)"]
+all = ["py-multihash (>=2.0.1)", "ecdsa (>=0.16.1)", "base58 (>=2.1.0)", "mnemonic (>=0.19)", "eth-abi (>=2.1.1)", "py-ecc (>=5.1.0)", "py-eth-sig-utils (>=0.4.0)", "rlp (>=2.0.1)", "jinja2 (>=2.11.3)", "web3 (>=5.16.0)", "zlmdb (>=21.2.1)", "xbr (>=21.2.1)", "passlib (>=1.7.4)", "argon2-cffi (>=20.1.0)", "cffi (>=1.14.5)", "pyqrcode (>=1.2.1)", "pytrie (>=0.4.0)", "pynacl (>=1.4.0)", "service-identity (>=18.1.0)", "pyopenssl (>=20.0.1)", "flatbuffers (>=1.12)", "py-ubjson (>=0.16.1)", "cbor (>=1.0.0)", "cbor2 (>=5.2.0)", "ujson (>=4.0.2)", "msgpack (>=1.0.2)", "python-snappy (>=0.6.0)", "wsaccel (>=0.6.3)", "attrs (>=20.3.0)", "twisted (>=20.3.0)", "zope.interface (>=5.2.0)"]
+accelerate = ["wsaccel (>=0.6.3)"]
 
 [[package]]
 name = "automat"
@@ -64,7 +64,7 @@ attrs = ">=19.2.0"
 six = "*"
 
 [package.extras]
-visualize = ["graphviz (>0.5.1)", "Twisted (>=16.1.1)"]
+visualize = ["Twisted (>=16.1.1)", "graphviz (>0.5.1)"]
 
 [[package]]
 name = "cffi"
@@ -91,7 +91,7 @@ daphne = ">=3.0,<4"
 Django = ">=2.2"
 
 [package.extras]
-tests = ["pytest", "pytest-django", "pytest-asyncio", "async-timeout", "coverage (>=4.5,<5.0)"]
+tests = ["coverage (>=4.5,<5.0)", "async-timeout", "pytest-asyncio", "pytest-django", "pytest"]
 
 [[package]]
 name = "click"
@@ -154,11 +154,11 @@ autobahn = ">=0.18"
 twisted = {version = ">=18.7", extras = ["tls"]}
 
 [package.extras]
-tests = ["hypothesis (==4.23)", "pytest (>=3.10,<4.0)", "pytest-asyncio (>=0.8,<1.0)"]
+tests = ["pytest-asyncio (>=0.8,<1.0)", "pytest (>=3.10,<4.0)", "hypothesis (==4.23)"]
 
 [[package]]
 name = "django"
-version = "3.2.14"
+version = "3.2.15"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -170,8 +170,8 @@ pytz = "*"
 sqlparse = ">=0.2.2"
 
 [package.extras]
-argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+argon2 = ["argon2-cffi (>=19.1.0)"]
 
 [[package]]
 name = "django-crispy-forms"
@@ -243,9 +243,9 @@ typing-extensions = {version = ">=3.6.4", markers = "python_version < \"3.8\""}
 zipp = ">=0.5"
 
 [package.extras]
-docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
+testing = ["importlib-resources (>=1.3)", "pytest-mypy", "pytest-black (>=0.3.7)", "pytest-perf (>=0.9.2)", "flufl.flake8", "pyfakefs", "pep517", "packaging", "pytest-enabler (>=1.0.1)", "pytest-cov", "pytest-flake8", "pytest-checkdocs (>=2.4)", "pytest (>=4.6)"]
 perf = ["ipython"]
-testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "packaging", "pep517", "pyfakefs", "flufl.flake8", "pytest-perf (>=0.9.2)", "pytest-black (>=0.3.7)", "pytest-mypy", "importlib-resources (>=1.3)"]
+docs = ["rst.linker (>=1.9)", "jaraco.packaging (>=8.2)", "sphinx"]
 
 [[package]]
 name = "incremental"
@@ -256,7 +256,7 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-scripts = ["click (>=6.0)", "twisted (>=16.4.0)"]
+scripts = ["twisted (>=16.4.0)", "click (>=6.0)"]
 
 [[package]]
 name = "pyasn1"
@@ -306,8 +306,8 @@ cryptography = ">=3.2"
 six = ">=1.5.2"
 
 [package.extras]
-docs = ["sphinx", "sphinx-rtd-theme"]
-test = ["flaky", "pretend", "pytest (>=3.0.1)"]
+test = ["pytest (>=3.0.1)", "pretend", "flaky"]
+docs = ["sphinx-rtd-theme", "sphinx"]
 
 [[package]]
 name = "python-decouple"
@@ -341,10 +341,10 @@ pyasn1-modules = "*"
 six = "*"
 
 [package.extras]
-dev = ["coverage[toml] (>=5.0.2)", "pytest", "sphinx", "furo", "idna", "pyopenssl"]
-docs = ["sphinx", "furo"]
+tests = ["pytest", "coverage[toml] (>=5.0.2)"]
 idna = ["idna"]
-tests = ["coverage[toml] (>=5.0.2)", "pytest"]
+docs = ["furo", "sphinx"]
+dev = ["pyopenssl", "idna", "furo", "sphinx", "pytest", "coverage[toml] (>=5.0.2)"]
 
 [[package]]
 name = "six"
@@ -384,20 +384,20 @@ typing-extensions = ">=3.6.5"
 "zope.interface" = ">=4.4.2"
 
 [package.extras]
-all_non_platform = ["cython-test-exception-raiser (>=1.0.2,<2)", "PyHamcrest (>=1.9.0)", "pyopenssl (>=16.0.0)", "service-identity (>=18.1.0)", "idna (>=2.4)", "pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)", "pyserial (>=3.0)", "h2 (>=3.0,<5.0)", "priority (>=1.1.0,<2.0)", "pywin32 (!=226)", "contextvars (>=2.4,<3)"]
-conch = ["pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)"]
-conch_nacl = ["pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)", "pynacl"]
+windows_platform = ["contextvars (>=2.4,<3)", "pywin32 (!=226)", "priority (>=1.1.0,<2.0)", "h2 (>=3.0,<5.0)", "pyserial (>=3.0)", "bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1", "idna (>=2.4)", "service-identity (>=18.1.0)", "pyopenssl (>=16.0.0)", "PyHamcrest (>=1.9.0)", "cython-test-exception-raiser (>=1.0.2,<2)", "pywin32 (!=226)"]
+tls = ["idna (>=2.4)", "service-identity (>=18.1.0)", "pyopenssl (>=16.0.0)"]
+test = ["PyHamcrest (>=1.9.0)", "cython-test-exception-raiser (>=1.0.2,<2)"]
+serial = ["pywin32 (!=226)", "pyserial (>=3.0)"]
+osx_platform = ["contextvars (>=2.4,<3)", "pywin32 (!=226)", "priority (>=1.1.0,<2.0)", "h2 (>=3.0,<5.0)", "pyserial (>=3.0)", "bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1", "idna (>=2.4)", "service-identity (>=18.1.0)", "pyopenssl (>=16.0.0)", "PyHamcrest (>=1.9.0)", "cython-test-exception-raiser (>=1.0.2,<2)", "pyobjc-framework-cocoa", "pyobjc-framework-cfnetwork", "pyobjc-core"]
+mypy = ["pydoctor (>=21.9.0,<21.10.0)", "contextvars (>=2.4,<3)", "python-subunit (>=1.4,<2.0)", "pywin32 (!=226)", "pynacl", "priority (>=1.1.0,<2.0)", "h2 (>=3.0,<5.0)", "pyserial (>=3.0)", "bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1", "idna (>=2.4)", "service-identity (>=18.1.0)", "pyopenssl (>=16.0.0)", "PyHamcrest (>=1.9.0)", "cython-test-exception-raiser (>=1.0.2,<2)", "coverage (>=6b1,<7)", "twistedchecker (>=0.7,<1.0)", "pyflakes (>=2.2,<3.0)", "sphinx (>=4.1.2,<6)", "readthedocs-sphinx-ext (>=2.1,<3.0)", "sphinx-rtd-theme (>=0.5,<1.0)", "towncrier (>=19.2,<20.0)", "types-pyopenssl", "types-setuptools", "mypy-zope (==0.3.4)", "mypy (==0.930)"]
+macos_platform = ["contextvars (>=2.4,<3)", "pywin32 (!=226)", "priority (>=1.1.0,<2.0)", "h2 (>=3.0,<5.0)", "pyserial (>=3.0)", "bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1", "idna (>=2.4)", "service-identity (>=18.1.0)", "pyopenssl (>=16.0.0)", "PyHamcrest (>=1.9.0)", "cython-test-exception-raiser (>=1.0.2,<2)", "pyobjc-framework-cocoa", "pyobjc-framework-cfnetwork", "pyobjc-core"]
+http2 = ["priority (>=1.1.0,<2.0)", "h2 (>=3.0,<5.0)"]
+dev_release = ["pydoctor (>=21.9.0,<21.10.0)", "sphinx (>=4.1.2,<6)", "readthedocs-sphinx-ext (>=2.1,<3.0)", "sphinx-rtd-theme (>=0.5,<1.0)", "towncrier (>=19.2,<20.0)"]
+dev = ["pydoctor (>=21.9.0,<21.10.0)", "python-subunit (>=1.4,<2.0)", "coverage (>=6b1,<7)", "twistedchecker (>=0.7,<1.0)", "pyflakes (>=2.2,<3.0)", "sphinx (>=4.1.2,<6)", "readthedocs-sphinx-ext (>=2.1,<3.0)", "sphinx-rtd-theme (>=0.5,<1.0)", "towncrier (>=19.2,<20.0)"]
 contextvars = ["contextvars (>=2.4,<3)"]
-dev = ["towncrier (>=19.2,<20.0)", "sphinx-rtd-theme (>=0.5,<1.0)", "readthedocs-sphinx-ext (>=2.1,<3.0)", "sphinx (>=4.1.2,<6)", "pyflakes (>=2.2,<3.0)", "twistedchecker (>=0.7,<1.0)", "coverage (>=6b1,<7)", "python-subunit (>=1.4,<2.0)", "pydoctor (>=21.9.0,<21.10.0)"]
-dev_release = ["towncrier (>=19.2,<20.0)", "sphinx-rtd-theme (>=0.5,<1.0)", "readthedocs-sphinx-ext (>=2.1,<3.0)", "sphinx (>=4.1.2,<6)", "pydoctor (>=21.9.0,<21.10.0)"]
-http2 = ["h2 (>=3.0,<5.0)", "priority (>=1.1.0,<2.0)"]
-macos_platform = ["pyobjc-core", "pyobjc-framework-cfnetwork", "pyobjc-framework-cocoa", "cython-test-exception-raiser (>=1.0.2,<2)", "PyHamcrest (>=1.9.0)", "pyopenssl (>=16.0.0)", "service-identity (>=18.1.0)", "idna (>=2.4)", "pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)", "pyserial (>=3.0)", "h2 (>=3.0,<5.0)", "priority (>=1.1.0,<2.0)", "pywin32 (!=226)", "contextvars (>=2.4,<3)"]
-mypy = ["mypy (==0.930)", "mypy-zope (==0.3.4)", "types-setuptools", "types-pyopenssl", "towncrier (>=19.2,<20.0)", "sphinx-rtd-theme (>=0.5,<1.0)", "readthedocs-sphinx-ext (>=2.1,<3.0)", "sphinx (>=4.1.2,<6)", "pyflakes (>=2.2,<3.0)", "twistedchecker (>=0.7,<1.0)", "coverage (>=6b1,<7)", "cython-test-exception-raiser (>=1.0.2,<2)", "PyHamcrest (>=1.9.0)", "pyopenssl (>=16.0.0)", "service-identity (>=18.1.0)", "idna (>=2.4)", "pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)", "pyserial (>=3.0)", "h2 (>=3.0,<5.0)", "priority (>=1.1.0,<2.0)", "pynacl", "pywin32 (!=226)", "python-subunit (>=1.4,<2.0)", "contextvars (>=2.4,<3)", "pydoctor (>=21.9.0,<21.10.0)"]
-osx_platform = ["pyobjc-core", "pyobjc-framework-cfnetwork", "pyobjc-framework-cocoa", "cython-test-exception-raiser (>=1.0.2,<2)", "PyHamcrest (>=1.9.0)", "pyopenssl (>=16.0.0)", "service-identity (>=18.1.0)", "idna (>=2.4)", "pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)", "pyserial (>=3.0)", "h2 (>=3.0,<5.0)", "priority (>=1.1.0,<2.0)", "pywin32 (!=226)", "contextvars (>=2.4,<3)"]
-serial = ["pyserial (>=3.0)", "pywin32 (!=226)"]
-test = ["cython-test-exception-raiser (>=1.0.2,<2)", "PyHamcrest (>=1.9.0)"]
-tls = ["pyopenssl (>=16.0.0)", "service-identity (>=18.1.0)", "idna (>=2.4)"]
-windows_platform = ["pywin32 (!=226)", "cython-test-exception-raiser (>=1.0.2,<2)", "PyHamcrest (>=1.9.0)", "pyopenssl (>=16.0.0)", "service-identity (>=18.1.0)", "idna (>=2.4)", "pyasn1", "cryptography (>=2.6)", "appdirs (>=1.4.0)", "bcrypt (>=3.0.0)", "pyserial (>=3.0)", "h2 (>=3.0,<5.0)", "priority (>=1.1.0,<2.0)", "pywin32 (!=226)", "contextvars (>=2.4,<3)"]
+conch_nacl = ["pynacl", "bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1"]
+conch = ["bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1"]
+all_non_platform = ["contextvars (>=2.4,<3)", "pywin32 (!=226)", "priority (>=1.1.0,<2.0)", "h2 (>=3.0,<5.0)", "pyserial (>=3.0)", "bcrypt (>=3.0.0)", "appdirs (>=1.4.0)", "cryptography (>=2.6)", "pyasn1", "idna (>=2.4)", "service-identity (>=18.1.0)", "pyopenssl (>=16.0.0)", "PyHamcrest (>=1.9.0)", "cython-test-exception-raiser (>=1.0.2,<2)"]
 
 [[package]]
 name = "twisted-iocpsupport"
@@ -416,9 +416,9 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-all = ["zope.interface (>=5.2.0)", "twisted (>=20.3.0)"]
-dev = ["wheel", "pytest (>=2.6.4)", "pytest-cov (>=1.8.1)", "pep8 (>=1.6.2)", "sphinx (>=1.2.3)", "pyenchant (>=1.6.6)", "sphinxcontrib-spelling (>=2.1.2)", "sphinx-rtd-theme (>=0.1.9)", "tox (>=2.1.1)", "mock (==1.3.0)", "twine (>=1.6.5)", "tox-gh-actions (>=2.2.0)"]
-twisted = ["zope.interface (>=5.2.0)", "twisted (>=20.3.0)"]
+twisted = ["twisted (>=20.3.0)", "zope.interface (>=5.2.0)"]
+dev = ["tox-gh-actions (>=2.2.0)", "twine (>=1.6.5)", "mock (==1.3.0)", "tox (>=2.1.1)", "sphinx-rtd-theme (>=0.1.9)", "sphinxcontrib-spelling (>=2.1.2)", "pyenchant (>=1.6.6)", "sphinx (>=1.2.3)", "pep8 (>=1.6.2)", "pytest-cov (>=1.8.1)", "pytest (>=2.6.4)", "wheel"]
+all = ["twisted (>=20.3.0)", "zope.interface (>=5.2.0)"]
 
 [[package]]
 name = "typing-extensions"
@@ -443,7 +443,7 @@ h11 = ">=0.8"
 typing-extensions = {version = "*", markers = "python_version < \"3.8\""}
 
 [package.extras]
-standard = ["websockets (>=9.1)", "httptools (>=0.2.0,<0.3.0)", "watchgod (>=0.6)", "python-dotenv (>=0.13)", "PyYAML (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "colorama (>=0.4)"]
+standard = ["colorama (>=0.4)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "PyYAML (>=5.1)", "python-dotenv (>=0.13)", "watchgod (>=0.6)", "httptools (>=0.2.0,<0.3.0)", "websockets (>=9.1)"]
 
 [[package]]
 name = "wsproto"
@@ -465,8 +465,8 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
-testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
+testing = ["pytest-mypy", "pytest-black (>=0.3.7)", "func-timeout", "jaraco.itertools", "pytest-enabler (>=1.0.1)", "pytest-cov", "pytest-flake8", "pytest-checkdocs (>=2.4)", "pytest (>=4.6)"]
+docs = ["rst.linker (>=1.9)", "jaraco.packaging (>=8.2)", "sphinx"]
 
 [[package]]
 name = "zope.interface"
@@ -484,7 +484,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "e5ed240723e8982a431909480084f0d707b30a212ea0175631b681dfe27468e2"
+content-hash = "c27791918dea9aadc6973d2672f4a0f7e71695907ce959b80797be133eac6baa"
 
 [metadata.files]
 asgiref = [
@@ -592,8 +592,8 @@ daphne = [
     {file = "daphne-3.0.2.tar.gz", hash = "sha256:76ffae916ba3aa66b46996c14fa713e46004788167a4873d647544e750e0e99f"},
 ]
 django = [
-    {file = "Django-3.2.14-py3-none-any.whl", hash = "sha256:a8681e098fa60f7c33a4b628d6fcd3fe983a0939ff1301ecacac21d0b38bad56"},
-    {file = "Django-3.2.14.tar.gz", hash = "sha256:677182ba8b5b285a4e072f3ac17ceee6aff1b5ce77fd173cc5b6a2d3dc022fcf"},
+    {file = "Django-3.2.15-py3-none-any.whl", hash = "sha256:115baf5049d5cf4163e43492cdc7139c306ed6d451e7d3571fe9612903903713"},
+    {file = "Django-3.2.15.tar.gz", hash = "sha256:f71934b1a822f14a86c9ac9634053689279cd04ae69cb6ade4a59471b886582b"},
 ]
 django-crispy-forms = [
     {file = "django-crispy-forms-1.12.0.tar.gz", hash = "sha256:d196db62ee8b4fc32d1f9583d0e4be1bb17328b662682c1ecb9fb77bbc0fcf77"},
