@@ -1,0 +1,14 @@
+[Unit]
+Description=BMv2 Switch
+After=p4edge-setup.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bmv2-start
+WorkingDirectory=/root/t4p4s
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+

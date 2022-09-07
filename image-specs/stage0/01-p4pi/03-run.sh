@@ -1,17 +1,20 @@
-#!/bin/bash -e
+#!/bin/sh
 
+install -m 755 files/bmv2-start "${ROOTFS_DIR}/usr/bin/"
+install -m 644 files/bmv2.service "${ROOTFS_DIR}/lib/systemd/system/"
+install -m 755 files/bmv2-p4rtshell "${ROOTFS_DIR}/usr/bin/"
 install -m 644 files/jupyter.service "${ROOTFS_DIR}/lib/systemd/system/"
 
-# T4P4S helper scripts
-install -m 644 files/t4p4s.service "${ROOTFS_DIR}/lib/systemd/system/"
-install -m 755 files/t4p4s-start "${ROOTFS_DIR}/usr/bin/"
-install -m 755 files/t4p4s-p4rtshell "${ROOTFS_DIR}/usr/bin/"
-install -m 755 files/setup_eth_wlan_bridge.sh "${ROOTFS_DIR}/root/"
+# Display logo on TTY login
+cp files/logo.png ${ROOTFS_DIR}/srv/p4edge/dashboard/static/assets/images/
+sed -i 's/P4Edge/P4Pi/' ${ROOTFS_DIR}/srv/p4edge/dashboard/forms.py 
+sed -i 's/P4Edge/P4Pi/' ${ROOTFS_DIR}/srv/p4edge/dashboard/templates/accounts/login.html 
+sed -i 's/P4Edge/P4Pi/' ${ROOTFS_DIR}/srv/p4edge/dashboard/templates/includes/navigation.html
+sed -i 's/P4Edge/P4Pi/' ${ROOTFS_DIR}/srv/p4edge/dashboard/templates/layouts/base.html
+sed -i 's/P4Edge/P4Pi/' ${ROOTFS_DIR}/srv/p4edge/dashboard/templates/layouts/base-fullscreen.html
+
 
 on_chroot << EOF
-
-# Enable t4p4s on boot
-systemctl enable t4p4s
 
 mkdir -p /home/pi/jupyter
 
@@ -22,3 +25,4 @@ pip3 install jupyterlab
 systemctl enable jupyter.service
 
 EOF
+
