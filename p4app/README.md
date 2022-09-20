@@ -80,8 +80,8 @@ A complete `basic.p4` will contain the following components:
 3. An action to drop a packet, using `mark_to_drop()`.
 4. **TODO:** An action (called `ipv4_forward`) that:
 	1. Sets the egress port for the next hop.
-	2. Updates the ethernet destination address with the address of the next hop.
-	3. Updates the ethernet source address with the address of the switch.
+	2. Updates the ethernet source address with the address of the switch.
+	3. Updates the ethernet destination address with the address of the next hop.
 	4. Decrements the TTL.
 5. **TODO:** Fix ingress control logic that:
     1. `ipv4_lpm` table should be applied only when IPv4 header is valid
