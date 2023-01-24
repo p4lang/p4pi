@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "p4edge-web"
+version = "0.1.0"
+description = "Web interface for p4edge"
+authors = ["Dávid Kis <kidraai@inf.elte.hu>"]
+maintainers = ["Dávid Kis <kidraai@inf.elte.hu>"]
+repository="https://github.com/p4edge/ui"
+license = "MIT"
+packages = [
+    { include = "dashboard" },
+    { include = "config" },
+]
+include = [
+  "requirements.txt",
+]
+
+[tool.poetry.dependencies]
+python = "~3.9"
+Django = "~=3.2.12"
+django-environ = "~=0.4.5"
+gunicorn = "^20.1.0"
+uvicorn = "^0.14.0"
+wsproto = "^1.0.0"
+channels = "^3.0.4"
+python-decouple = "^3.4"
+pycountry = "^20.7.3"
+django-crispy-forms = "^1.12.0"
+python-socketio = "^4.6.1"
+python-engineio = "^3.13.0"
+eventlet = "0.30.0"
+psutil = "^5.9.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

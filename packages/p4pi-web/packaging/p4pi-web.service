@@ -1,0 +1,17 @@
+[Unit]
+Description=Web UI for P4edge
+After=network.target
+
+[Service]
+Type=notify
+User=root
+Group=www-data
+WorkingDirectory=/srv/p4edge
+ExecStart=gunicorn --config gunicorn-cfg.py config.wsgi
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

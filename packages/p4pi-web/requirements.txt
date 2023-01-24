@@ -1,0 +1,42 @@
+asgiref==3.4.1; python_version >= "3.6"
+attrs==21.2.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+autobahn==21.3.1; python_version >= "3.7"
+automat==20.2.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+cffi==1.14.6; python_version >= "3.7"
+channels==3.0.4; python_version >= "3.6"
+click==8.0.1; python_version >= "3.6"
+colorama==0.4.4; python_version >= "3.6" and python_full_version < "3.0.0" and platform_system == "Windows" or platform_system == "Windows" and python_version >= "3.6" and python_full_version >= "3.5.0"
+constantly==15.1.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+cryptography==3.4.8; python_full_version >= "3.6.7" and python_version >= "3.7"
+daphne==3.0.2; python_version >= "3.6"
+django-crispy-forms==1.12.0; python_version >= "3.6"
+django-environ==0.4.5
+django==3.2.12; python_version >= "3.6"
+dnspython==1.16.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
+eventlet==0.30.0
+greenlet==1.1.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
+gunicorn==20.1.0; python_version >= "3.5"
+h11==0.12.0; python_version >= "3.6" and python_full_version >= "3.6.1"
+hyperlink==21.0.0; python_full_version >= "3.6.7" and python_version >= "3.7"
+idna==3.2; python_full_version >= "3.6.7" and python_version >= "3.7"
+incremental==21.3.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+psutil==5.9.0; (python_version >= "2.6" and python_full_version < "3.0.0") or (python_full_version >= "3.4.0")
+pyasn1-modules==0.2.8; python_full_version >= "3.6.7" and python_version >= "3.6"
+pyasn1==0.4.8; python_full_version >= "3.6.7" and python_version >= "3.6"
+pycountry==20.7.3
+pycparser==2.20; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.7"
+pyopenssl==20.0.1; python_full_version >= "3.6.7" and python_version >= "3.6"
+python-decouple==3.4
+python-engineio==3.14.2
+python-socketio==4.6.1
+pytz==2021.1; python_version >= "3.6"
+service-identity==21.1.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+six==1.16.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+sqlparse==0.4.2; python_version >= "3.6"
+twisted-iocpsupport==1.0.2; python_full_version >= "3.6.7" and python_version >= "3.6" and platform_system == "Windows"
+twisted==22.4.0; python_full_version >= "3.6.7" and python_version >= "3.6"
+txaio==21.2.1; python_version >= "3.7"
+typing-extensions==3.10.0.2; python_full_version >= "3.6.7" and python_version >= "3.6"
+uvicorn==0.14.0
+wsproto==1.0.0; python_full_version >= "3.6.1"
+zope.interface==5.4.0; python_full_version >= "3.6.7" and python_version >= "3.6"

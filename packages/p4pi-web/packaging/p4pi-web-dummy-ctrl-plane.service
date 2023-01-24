@@ -1,0 +1,13 @@
+[Unit]
+Description=Collect statistics for p4edge-web
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=www-data
+WorkingDirectory=/srv/p4edge
+ExecStart=/usr/bin/python3 dummy_ctrl_plane_connection.py
+
+[Install]
+WantedBy=multi-user.target
