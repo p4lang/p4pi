@@ -1,0 +1,11 @@
+p4lang-pi
+p4lang-p4c
+p4lang-bmv2
+p4edge-t4p4s
+p4pi-examples
+p4pi-web
+p4edge-linux-image-5.15.33-v8+
+git
+vim
+tmux
+dpdk-kmods-dkms
