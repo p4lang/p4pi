@@ -20,11 +20,4 @@ apt-get -y update
 
 wget https://raw.githubusercontent.com/p4lang/behavioral-model/main/tools/p4dbg.py
 mv p4dbg.py /usr/lib/python3/dist-packages/
-
-echo 'kernel="vmlinuz-5.15.33-v8+"' >> /boot/config.txt
-
-# Enable web UI
-systemctl enable p4pi-web
-
 EOF
-
