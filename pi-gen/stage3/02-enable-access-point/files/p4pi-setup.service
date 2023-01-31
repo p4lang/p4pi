@@ -4,7 +4,7 @@ Requires=systemd-networkd.service
 After=network.target
 
 [Service]
-ExecStart=/usr/sbin/p4edge-setup
+ExecStart=/usr/sbin/p4pi-setup
 
 [Install]
 WantedBy=multi-user.target

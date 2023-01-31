@@ -1,6 +1,6 @@
 #!/bin/bash
 
-brctl addbr br0
+# brctl addbr br0
 ip netns add gigport
 
 ip netns exec gigport brctl addbr br1
