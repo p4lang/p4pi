@@ -8,4 +8,5 @@ p4edge-linux-image-5.15.33-v8+
 git
 vim
 tmux
+bridge-utils
 dpdk-kmods-dkms
