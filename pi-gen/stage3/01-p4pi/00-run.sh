@@ -4,8 +4,8 @@
 install -m 644 files/motd "${ROOTFS_DIR}/etc/"
 
 on_chroot << EOF
-echo 'deb [signed-by=/usr/share/keyrings/p4edge-kernel-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4edge:/kernel/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4edge-kernel.list
-curl -fsSL https://download.opensuse.org/repositories/home:p4edge:/kernel/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4edge-kernel-archive-keyring.gpg
+echo 'deb [signed-by=/usr/share/keyrings/p4pi-kernel-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4pi:/kernel/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4pi-kernel.list
+curl -fsSL https://download.opensuse.org/repositories/home:p4pi:/kernel/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4pi-kernel-archive-keyring.gpg
 
 echo 'deb [signed-by=/usr/share/keyrings/p4edge-p4lang-testing-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4edge:/p4lang-testing/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4edge-p4lang-testing.list
 curl -fsSL https://download.opensuse.org/repositories/home:/p4edge:/p4lang-testing/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4edge-p4lang-testing-archive-keyring.gpg
