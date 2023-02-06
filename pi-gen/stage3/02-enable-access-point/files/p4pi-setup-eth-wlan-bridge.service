@@ -3,7 +3,7 @@ Description=Setup eth wlan bridge for p4pi l2switch example
 
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/p4pi_setup_eth_wlan_bridge
+ExecStart=/usr/sbin/p4pi-setup-eth-wlan-bridge
 ExecStop=
 RemainAfterExit=yes
 
