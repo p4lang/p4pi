@@ -21,7 +21,7 @@ def update_dhcpcd_config(static_ip_address):
 
 
 def update_dnsmasq_config(range_min, range_max, lease):
-    dnsmasq_conf_fd = Path('/etc/dnsmasq.d/p4edge.conf')
+    dnsmasq_conf_fd = Path('/etc/dnsmasq.d/p4pi.conf')
     lines = dnsmasq_conf_fd.read_text()
     lines = re.sub(
         r'(interface=br0.*)(dhcp-range=.*?)$',
@@ -141,7 +141,7 @@ def set_t4p4s_switch(example):
 
 def restart_web_service():
     try:
-        subprocess.call(["systemctl","restart","p4edge-web.service"])
+        subprocess.call(["systemctl","restart","p4pi-web.service"])
     except:
         pass
 
@@ -193,6 +193,6 @@ def upload_p4_program(p4_code, compiler):
         restart_t4p4s_service()
     else:
         Path(f'{bmv2_location}/examples/uploaded_switch/uploaded_switch.p4').write_text(p4_code)
-        set_t4p4s_switch('uploaded_switch') 
+        set_t4p4s_switch('uploaded_switch')
         restart_bmv2_service()
 

@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "p4edge-web"
+name = "p4pi-web"
 version = "0.1.0"
-description = "Web interface for p4edge"
+description = "Web interface for p4pi"
 authors = ["Dávid Kis <kidraai@inf.elte.hu>"]
 maintainers = ["Dávid Kis <kidraai@inf.elte.hu>"]
 repository="https://github.com/p4edge/ui"

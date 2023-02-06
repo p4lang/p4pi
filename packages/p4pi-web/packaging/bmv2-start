@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export P4PI=/root/PI
-export GRPCPP=/root/P4Runtime_GRPCPP
-export GRPC=/root/grpc
+export P4PI=/root/t4p4s/third_party/PI
+export GRPCPP=/root/t4p4s/third_party/P4Runtime_GRPCPP
+export GRPC=/root/t4p4s/third_party/grpc
 
 BM2_WDIR=/root/bmv2
 P4_PROG=l2switch

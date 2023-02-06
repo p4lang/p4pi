@@ -43,7 +43,7 @@ def GetStaticIpAddress():
 
 def GetDHCPSettings(field, fid=-1):
     try:
-        with open('/etc/dnsmasq.d/p4edge.conf','r') as f:
+        with open('/etc/dnsmasq.d/p4pi.conf','r') as f:
             for line in f.readlines():
                 if len(line)==0 or line[0]=='#':
                     continue
