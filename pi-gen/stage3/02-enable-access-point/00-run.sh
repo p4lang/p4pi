@@ -4,7 +4,6 @@ install -m 644 files/dhcpcd.conf "${ROOTFS_DIR}/etc/"
 install -m 644 files/dnsmasq.conf "${ROOTFS_DIR}/etc/"
 install -m 644 files/p4pi.conf "${ROOTFS_DIR}/etc/dnsmasq.d/"
 install -m 644 files/hostapd.conf "${ROOTFS_DIR}/etc/hostapd/"
-install -m 644 files/rfkill-unblock-wifi.service "${ROOTFS_DIR}/lib/systemd/system/"
 
 install -m 755 files/p4pi-setup-eth-wlan-bridge "${ROOTFS_DIR}/usr/sbin/"
 install -m 644 files/p4pi-setup-eth-wlan-bridge.service "${ROOTFS_DIR}/lib/systemd/system/"
@@ -31,9 +30,6 @@ systemctl enable systemd-resolved.service
 systemctl enable systemd-networkd.service
 systemctl enable p4pi-setup.service
 systemctl enable t4p4s.service
-
-systemctl enable rfkill-unblock-wifi.service
-# sed -i 's|#DAEMON_CONF.*$|DAEMON_CONF="/etc/hostapd/hostapd.conf"|' /etc/default/hostapd
 
 # Enable web UI
 systemctl enable p4pi-web
