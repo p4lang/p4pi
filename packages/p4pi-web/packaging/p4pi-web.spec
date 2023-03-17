@@ -85,3 +85,5 @@ python3 -m django loaddata fixtures/users.json --settings=config.settings
 %{_unitdir}/%{name}-genstat.service
 %{_unitdir}/%{name}-dummy-ctrl-plane.service
 %{_unitdir}/bmv2.service
+%{_bindir}/bmv2-start
+%{_bindir}/bmv2-p4rtshell
