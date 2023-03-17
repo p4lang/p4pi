@@ -1,7 +1,7 @@
 <services>
   <service name="obs_scm">
     <param name="scm">git</param>
-    <param name="url">https://github.com/IcePhoenX/turbo-engine</param>
+    <param name="url">https://github.com/IcePhoenX/p4pi</param>
     <param name="filename">p4pi-web</param>
     <param name="match-tag">p4pi_web_v*</param>
     <param name="revision">main</param>
@@ -17,4 +17,3 @@
   </service>
   <service name="set_version" mode="buildtime"/>
 </services>
-
