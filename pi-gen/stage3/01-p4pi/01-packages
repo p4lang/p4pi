@@ -10,4 +10,5 @@ git
 vim
 tmux
 bridge-utils
+iperf
 dpdk-kmods-dkms
