@@ -56,6 +56,7 @@ SQLITE_PATH=%{srvdir}/db.sqlite3
 EOF
 
 python3 -m pip install -r %{srvdir}/requirements.txt
+python3 -m pip install p4runtime-shell
 
 cd %{srvdir}
 python3 -m django migrate --settings=config.settings
