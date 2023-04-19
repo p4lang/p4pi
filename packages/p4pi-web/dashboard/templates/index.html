@@ -41,7 +41,7 @@
                                                         <option value="l2switch">L2 Switch</option>
                                                         <option value="calc">Calculator</option>
                                                         <option value="reflector">Reflector</option>
-                                                        <option value="traffic_filter">Firewall</option>
+                                                        <option value="traffic_filter">Traffic Filter</option>
                                                         <option value="stateful_firewall">Stateful Firewall</option>
                                                         <option value="basic_mirror">Basic Mirror</option>
                                                         <option value="arp_icmp">ARP/ICMP</option>
@@ -130,12 +130,11 @@
         }
         log.value = ''
 
-        const asd = sendPostRequest("{% url 'switch' %}", {
+        sendPostRequest("{% url 'switch' %}", {
             compiler: compiler,
             program: program,
             src: ''
         });
-	console.log(asd)
     }
 
     function upload() {

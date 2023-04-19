@@ -138,7 +138,6 @@ def update_t4p4s_examples(dpdk_opts):
 def set_t4p4s_switch(example):
     Path('/root/t4p4s-switch').write_text(example)
 
-
 def restart_web_service():
     try:
         subprocess.call(["systemctl","restart","p4pi-web.service"])
@@ -195,4 +194,3 @@ def upload_p4_program(p4_code, compiler):
         Path(f'{bmv2_location}/examples/uploaded_switch/uploaded_switch.p4').write_text(p4_code)
         set_t4p4s_switch('uploaded_switch')
         restart_bmv2_service()
-
