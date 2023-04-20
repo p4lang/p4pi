@@ -13,8 +13,11 @@ curl -fsSL https://download.opensuse.org/repositories/home:/p4edge:/p4lang-testi
 echo 'deb [signed-by=/usr/share/keyrings/p4edge-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4edge/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4edge.list
 curl -fsSL https://download.opensuse.org/repositories/home:/p4edge/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4edge-archive-keyring.gpg
 
-echo 'deb [signed-by=/usr/share/keyrings/p4pi-unstable-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4pi:/unstable/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4pi-unstable.list
-curl -fsSL https://download.opensuse.org/repositories/home:/p4pi:/unstable/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4pi-unstable-archive-keyring.gpg
+echo 'deb [signed-by=/usr/share/keyrings/p4pi-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4pi/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4pi.list
+curl -fsSL https://download.opensuse.org/repositories/home:/p4pi/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4pi-archive-keyring.gpg
+
+# echo 'deb [signed-by=/usr/share/keyrings/p4pi-unstable-archive-keyring.gpg] http://download.opensuse.org/repositories/home:/p4pi:/unstable/Raspbian_11/ /' | tee /etc/apt/sources.list.d/p4pi-unstable.list
+# curl -fsSL https://download.opensuse.org/repositories/home:/p4pi:/unstable/Raspbian_11/Release.key | gpg --dearmor > /usr/share/keyrings/p4pi-unstable-archive-keyring.gpg
 
 apt-get -y update
 
