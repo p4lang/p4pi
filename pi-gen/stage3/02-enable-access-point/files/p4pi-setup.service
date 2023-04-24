@@ -1,7 +1,7 @@
 [Unit]
 Description=Setup veth and bridge interfaces for packet processing
 Requires=systemd-networkd.service
-After=network.target
+After=network.target dhcpcd.service
 
 [Service]
 ExecStart=/usr/sbin/p4pi-setup
