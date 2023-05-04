@@ -1,0 +1,19 @@
+<services>
+  <service name="obs_scm">
+    <param name="scm">git</param>
+    <param name="url">https://github.com/IcePhoenX/p4pi</param>
+    <param name="filename">p4pi-web</param>
+    <param name="match-tag">p4pi_web_v*</param>
+    <param name="revision">@PARENT_TAG@</param>
+    <param name="versionformat">@PARENT_TAG@</param>
+    <param name="versionrewrite-pattern">p4pi_web_v(.*)</param>
+    <param name="subdir">packages/p4pi-web</param>
+    <param name="extract">packaging/p4pi-web.spec</param>
+  </service>
+  <service name="tar" mode="buildtime"/>
+  <service name="recompress" mode="buildtime">
+    <param name="compression">gz</param>
+    <param name="file">*.tar</param>
+  </service>
+  <service name="set_version" mode="buildtime"/>
+</services>

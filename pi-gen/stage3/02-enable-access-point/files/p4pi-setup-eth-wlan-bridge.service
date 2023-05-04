@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup eth wlan bridge for p4pi l2switch example
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/p4pi-setup-eth-wlan-bridge
+ExecStop=
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

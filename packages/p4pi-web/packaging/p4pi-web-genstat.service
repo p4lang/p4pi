@@ -1,0 +1,13 @@
+[Unit]
+Description=Collect statistics for p4pi-web
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=www-data
+WorkingDirectory=/srv/p4pi
+ExecStart=/usr/bin/python3 generate-statistics.py
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,351 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Statistics {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<script src="/static/assets/js/jquery.min.js"></script>
+<script src="/static/assets/js/chart.js"></script>
+
+<script language="javascript">
+
+setTimeout(function() {
+  location.reload();
+}, 30000);
+
+var checkExist = setInterval(function() {
+   if ($('#chart-temp').length) {
+     let ctx = document.getElementById("chart-temp").getContext("2d");
+     let chart = new Chart(ctx, {
+       type: "line",
+       data: {
+     labels: {{ timestamps|safe }},
+          datasets: [
+             {
+               label: "CPU temp (C)",
+               backgroundColor: "#79AEC8",
+               borderColor: "#417690",
+               data: {{ cpu_temp }},
+               //data: [10,10,20,10],
+             }
+          ]
+       },
+       options: {
+	  legend: {
+            display: false
+          },
+          title: {
+             text: "CPU temperature (C°)",
+             display: true
+          }
+       }
+     });
+      clearInterval(checkExist);
+   }
+}, 100);
+
+
+var checkExistWifi = setInterval(function() {
+   if ($('#chart-wifi').length) {
+     let ctx = document.getElementById("chart-wifi").getContext("2d");
+     let chart = new Chart(ctx, {
+       type: "line",
+       data: {
+	  labels: {{ timestamps|safe }},
+          datasets: [
+             {
+               label: "Wifi up",
+               backgroundColor: "#79AEC8",
+               borderColor: "#417690",
+               data: {{ wifi_up }},
+               //data: [10,10,20,10],
+             },
+             {
+               label: "Wifi down",
+               backgroundColor: "#FFACE4",
+               borderColor: "#CC0088",
+               data: {{ wifi_down }},
+               //data: [10,10,20,10],
+             }
+          ]
+       },
+       options: {
+          title: {
+             text: "Wifi bandwidth (Mbps)",
+             display: true
+          },
+
+		           scales: {
+        yAxes: [{
+            display: true,
+            stacked: true,
+            ticks: {
+                min: 0, // minimum value
+                //max: 1000, // maximum value
+                stepSize: 250
+            }
+        }]
+    }
+       }
+     });
+      clearInterval(checkExistWifi);
+   }
+}, 100);
+
+
+var checkExistEth = setInterval(function() {
+   if ($('#chart-eth').length) {
+     let ctx = document.getElementById("chart-eth").getContext("2d");
+     let chart = new Chart(ctx, {
+       type: "line",
+       data: {
+	  labels: {{ timestamps|safe }},
+          datasets: [
+             {
+               label: "Eth up",
+               backgroundColor: "#79AEC8",
+               borderColor: "#417690",
+               data: {{ eth_up }},
+               //data: [10,10,20,10],
+             },
+             {
+               label: "ETH down",
+               backgroundColor: "#FFACE4",
+               borderColor: "#CC0088",
+               data: {{ eth_down }},
+               //data: [10,10,20,10],
+             }
+          ]
+       },
+       options: {
+          title: {
+             text: "ETH bandwidth (Mbps)",
+             display: true
+          },
+
+		           scales: {
+        yAxes: [{
+            display: true,
+            stacked: true,
+            ticks: {
+                min: 0, // minimum value
+                //max: 1000, // maximum value
+                stepSize: 250
+            }
+        }]
+    }
+       }
+     });
+      clearInterval(checkExistEth);
+   }
+}, 100);
+
+var checkExist2 = setInterval(function() {
+   if ($('#chart-mem').length) {
+     let ctx = document.getElementById("chart-mem").getContext("2d");
+     let chart = new Chart(ctx, {
+       type: "line",
+       data: {
+	  labels: {{ timestamps|safe }},
+          datasets: [
+             {
+               label: "Memory percentage",
+               backgroundColor: "#79AEC8",
+               borderColor: "#417690",
+               data: {{ percent_mem }},
+               //data: [10,10,20,10],
+             }
+          ]
+       },
+       options: {
+	  legend: {
+            display: false
+          },
+          title: {
+             text: "RAM %",
+             display: true
+          },
+		           scales: {
+        yAxes: [{
+            display: true,
+            stacked: true,
+            ticks: {
+                min: 0, // minimum value
+                max: 100, // maximum value
+                stepSize: 25
+            }
+        }]
+    }
+       }
+     });
+      clearInterval(checkExist2);
+   }
+}, 100);
+
+var checkExistCPU = setInterval(function() {
+   if ($('#chart-cpu').length) {
+     let ctx = document.getElementById("chart-cpu").getContext("2d");
+     let chart = new Chart(ctx, {
+       type: "line",
+       data: {
+	  labels: {{ timestamps|safe }},
+          datasets: [
+             {
+               label: "CPU %",
+               backgroundColor: "#79AEC8",
+               borderColor: "#417690",
+               data: {{ cpu_usage }},
+               //data: [10,10,20,10],
+             }
+          ]
+       },
+       options: {
+	  legend: {
+            display: false
+          },
+          title: {
+             text: "CPU %",
+             display: true
+          },
+		           scales: {
+        yAxes: [{
+            display: true,
+            stacked: true,
+            ticks: {
+                min: 0, // minimum value
+                max: 100, // maximum value
+                stepSize: 25
+            }
+        }]
+    }
+       }
+     });
+      clearInterval(checkExistCPU);
+   }
+}, 100);
+
+var checkExistHDD = setInterval(function() {
+   if ($('#chart-hdd').length) {
+     let ctx = document.getElementById("chart-hdd").getContext("2d");
+     let chart = new Chart(ctx, {
+       type: "line",
+       data: {
+	  labels: {{ timestamps|safe }},
+          datasets: [
+             {
+               label: "Disk usage %",
+               backgroundColor: "#79AEC8",
+               borderColor: "#417690",
+               data: {{ hdd_percent }},
+               //data: [10,10,20,10],
+             }
+          ]
+       },
+       options: {
+	  legend: {
+            display: false
+          },
+          title: {
+             text: "disk usage",
+             display: true
+          },
+		           scales: {
+        yAxes: [{
+            display: true,
+            stacked: true,
+            ticks: {
+                min: 0, // minimum value
+                max: 100, // maximum value
+                stepSize: 25
+            }
+        }]
+    }
+       }
+     });
+      clearInterval(checkExistHDD);
+   }
+}, 100);
+
+</script>
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Statistics</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Statistics</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Statistics</h5>
+                                </div>
+
+                                <div class="card-body">
+
+                                    {% if errors %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% for error in errors %}
+                                                <p class="text-danger mb-1">
+                                                    {{ error }}
+                                                </p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <br />
+                                    {% endif %}
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                          <canvas id="chart-temp" width="500" height="500"></canvas>
+                                        </div>
+                                        <div class="col-md-5">
+                                          <canvas id="chart-mem" width="500" height="500"></canvas>
+                                        </div>
+                                        <div class="col-md-5">
+                                          <canvas id="chart-wifi" width="500" height="500"></canvas>
+                                        </div>
+                                        <div class="col-md-5">
+                                          <canvas id="chart-eth" width="500" height="500"></canvas>
+                                        </div>
+                                        <div class="col-md-5">
+                                          <canvas id="chart-cpu" width="500" height="500"></canvas>
+                                        </div>
+                                        <div class="col-md-5">
+                                          <canvas id="chart-hdd" width="500" height="500"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

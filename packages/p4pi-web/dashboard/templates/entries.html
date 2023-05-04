@@ -1,0 +1,136 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Entries {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+tr td{
+  padding: 2px !important;
+  margin: 5px !important;
+}
+tr th{
+  padding: 2px !important;
+  margin: 5px !important;
+}
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Entries</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Entries</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Table entries</h5>
+                                </div>
+
+                                <div class="card-body">
+
+                                    {% if errors %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% for error in errors %}
+                                                <p class="text-danger mb-1">
+                                                    {{ error }}
+                                                </p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <br />
+                                    {% endif %}
+
+                                    <div class="row">
+				    {% for table in tables %}
+                                        <div class="col-md-6">
+					    {{ table.name | safe }}
+					    <table id="table-{{ table.name |safe }}" class="table table-sm table-striped">
+                                                <thead>
+						    <tr>
+							<th scope="col">Match</th>
+							{% if table.type == 'lpm' %}
+							<th scope="col">Prefix</th>
+							{% endif %}
+							<th scope="col">Action</th>
+							<th scope="col">Params</th>
+							<th scope="col"> </th>
+						    </tr>
+						</thead>
+						<tbody>
+						    {% for entry in table.entries %}
+						    <tr>
+							<th scope="row">{{ entry.match | safe }}</th>
+							    {% if table.type == 'lpm' %}
+							<td>{{ entry.mask | safe }}</td>
+							    {% endif %}
+							<td>{{ entry.action | safe }}</td>
+							<td>{{ entry.params | safe }}</td>
+							<td>
+							    {% if table.editable %}
+							    <form action='{% url 'entries' %}' method='get'>
+							        <input type='hidden' name='mode' value='delete'>
+							        <input type='hidden' name='name' value='{{ table.name | safe }}'>
+							        <input type='hidden' name='match' value='{{ entry.match | safe }}'>
+							        <input type='hidden' name='mask' value='{{ entry.mask | safe }}'>
+							        <input type='hidden' name='action' value='{{ entry.action | safe }}'>
+							        <input type='hidden' name='params' value='{{ entry.params | safe }}'>
+								<button type="submit" class="btn btn-primary" style="margin:0px;padding:0px;"> <i class="feather icon-trash" style="margin:0;padding:0;"></i></button>
+						            </form>
+							    {% endif %}
+							</td>
+						    </tr>
+						    {% endfor %}
+						    <tr>
+							    {% if table.editable %}
+							    <form action='{% url 'entries' %}' method='get'>
+							        <input type='hidden' name='mode' value='add'>
+							        <input type='hidden' name='name' value='{{ table.name | safe }}'>
+							<td><input class="form-control input-sm" style="padding:1px;margin:1px;" type='text' name='match' value=''></td>
+							<td {% if table.type != 'lpm' %} style="display:none;" {% endif %}><input {% if table.type == 'lpm' %} class="form-control input-sm" {% else %} type='hidden' {% endif %} style="padding:1px;margin:1px;" type='text' name='mask' value=''></td>
+							<td><input class="form-control input-sm" style="padding:1px;margin:1px;" type='text' name='action' value=''></td>
+							<td><input class="form-control input-sm" style="padding:1px;margin:1px;" type='text' name='params' value=''></td>
+							<td><button type="submit" class="btn btn-primary" style="margin:0px;padding:0px;"> <i class="feather icon-check" style="margin:0;padding:0;"></i></button></td>
+						            </form>
+							    {% endif %}
+					            </tr>
+						</tbody>
+					    </table>
+                                        </div>
+				    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
