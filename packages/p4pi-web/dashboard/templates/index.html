@@ -1,0 +1,167 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} P4 Compiler {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+  <script src="/static/socket.io.js"></script>
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>P4 Switch</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h5>P4 Program</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="compiler">Compiler / Target</label>
+                                                    <select class="form-control" id="compiler">
+                                                        <option>T4P4S</option>
+                                                        <option>BMv2</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="p4-program">P4 Program</label>
+                                                    <select class="form-control" name="p4-program" id="p4-program">
+                                                        <option value="l2switch">L2 Switch</option>
+                                                        <option value="calc">Calculator</option>
+                                                        <option value="reflector">Reflector</option>
+                                                        <option value="traffic_filter">Traffic Filter</option>
+                                                        <option value="stateful_firewall">Stateful Firewall</option>
+                                                        <option value="basic_mirror">Basic Mirror</option>
+                                                        <option value="arp_icmp">ARP/ICMP</option>
+                                                        <option value="custom">Upload</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group d-none" id="file-upload">
+                                                    <label for="src-file">Upload source:</label>
+                                                    <input type="file" class="form-control" name="src-file" id="src-file">
+                                                    <button type="button" class="btn btn-primary" onclick="upload()">
+                                                        <i class="feather icon-upload"></i>Upload
+                                                    </button>
+                                                </div>
+
+                                                <hr>
+                                                <div class="form-group">
+                                                    <textarea id="switch-log" cols="100" rows="20"></textarea>
+                                                </div>
+                                                <button type="button" class="btn btn-primary" onclick="setTimeout(run, 0)">
+                                                    <i class="feather icon-play"></i>Run
+                                                </button>
+                                                <button type="button" class="btn btn-primary" onclick="kill()">
+                                                    <i class="feather icon-stop-circle"></i>Kill
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    csrftoken = getCookie('csrftoken');
+    const log = document.getElementById("switch-log");
+    var socket = io.connect({transports: ["websocket", "polling"]});
+    socket.emit("page_loaded")
+
+    socket.on("switch_output", (output) => {
+        log.value += output["output"];
+        if(log.selectionStart == log.selectionEnd) {
+            log.scrollTop = log.scrollHeight;
+        }
+    });
+
+
+    $('#p4-program').on('change', () => {
+        const val = $('#p4-program').val();
+        if (val === "custom") {
+            $('#file-upload').removeClass('d-none');
+        } else {
+            $('#file-upload').addClass('d-none');
+        }
+    });
+
+    function kill() {
+        const compiler = $('#compiler').val();
+        sendPostRequest("{% url 'switch' %}", {
+            compiler: compiler,
+            program: 'kill_service',
+            src: ''
+        });
+    }
+
+    function run() {
+        const compiler = $('#compiler').val();
+        const program = $('#p4-program').val();
+
+        if (compiler == null || compiler == '') {
+            return;
+        }
+
+        if (program == null || program == '') {
+            return;
+        }
+        log.value = ''
+
+        sendPostRequest("{% url 'switch' %}", {
+            compiler: compiler,
+            program: program,
+            src: ''
+        });
+    }
+
+    function upload() {
+        const compiler = $('#compiler').val();
+        const program = $('#p4-program').val();
+
+        if (compiler == null || compiler == '') {
+            return;
+        }
+
+        if (program == null || program == '') {
+            return;
+        }
+
+        const file = $('#src-file')[0].files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsText(file, "UTF-8");
+            reader.onload = function (evt) {
+                sendPostRequest("{% url 'switch' %}", {
+                    compiler: compiler,
+                    program: program,
+                    src: evt.target.result
+                });
+            }
+        }
+    }
+</script>
+
+{% endblock javascripts %}

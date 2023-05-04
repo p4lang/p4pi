@@ -1,0 +1,14 @@
+p4lang-pi
+p4lang-p4c
+p4lang-bmv2
+p4edge-t4p4s
+p4pi-linux-headers-5.15.84-v8-p4pi
+p4pi-linux-image-5.15.84-v8-p4pi
+p4pi-examples
+p4pi-web
+git
+vim
+tmux
+bridge-utils
+iperf
+dpdk-kmods-dkms

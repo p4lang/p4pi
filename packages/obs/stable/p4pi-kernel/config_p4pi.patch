@@ -1,0 +1,90 @@
+diff --git a/scripts/Makefile.package b/scripts/Makefile.package
+index b74c65284..e6aaa9fe5 100644
+--- a/scripts/Makefile.package
++++ b/scripts/Makefile.package
+@@ -75,7 +75,7 @@ deb-pkg:
+ 	$(call cmd,src_tar,$(KDEB_SOURCENAME))
+ 	origversion=$$(dpkg-parsechangelog -SVersion |sed 's/-[^-]*$$//');\
+ 		mv $(KDEB_SOURCENAME).tar.gz ../$(KDEB_SOURCENAME)_$${origversion}.orig.tar.gz
+-	+dpkg-buildpackage -r$(KBUILD_PKG_ROOTCMD) -a$$(cat debian/arch) $(DPKG_FLAGS) -i.git -us -uc
++	+dpkg-buildpackage -r$(KBUILD_PKG_ROOTCMD) -a$$(cat debian/arch) $(DPKG_FLAGS) -i.git -us -uc -S
+ 
+ PHONY += bindeb-pkg
+ bindeb-pkg:
+diff --git a/scripts/package/builddeb b/scripts/package/builddeb
+index 91a502bb9..227fbf99f 100755
+--- a/scripts/package/builddeb
++++ b/scripts/package/builddeb
+@@ -107,9 +107,9 @@ deploy_libc_headers () {
+ }
+ 
+ version=$KERNELRELEASE
+-tmpdir=debian/linux-image
+-dbg_dir=debian/linux-image-dbg
+-packagename=linux-image-$version
++tmpdir=debian/p4pi-linux-image
++dbg_dir=debian/p4pi-linux-image-dbg
++packagename=p4pi-linux-image-$version
+ dbg_packagename=$packagename-dbg
+ 
+ if [ "$ARCH" = "um" ] ; then
+@@ -210,12 +210,12 @@ done
+ 
+ if [ "$ARCH" != "um" ]; then
+ 	if is_enabled CONFIG_MODULES; then
+-		deploy_kernel_headers debian/linux-headers
+-		create_package linux-headers-$version debian/linux-headers
++		deploy_kernel_headers debian/p4pi-linux-headers
++		create_package p4pi-linux-headers-$version debian/p4pi-linux-headers
+ 	fi
+ 
+-	deploy_libc_headers debian/linux-libc-dev
+-	create_package linux-libc-dev debian/linux-libc-dev
++	deploy_libc_headers debian/p4pi-linux-libc-dev
++	create_package p4pi-linux-libc-dev debian/p4pi-linux-libc-dev
+ fi
+ 
+ create_package "$packagename" "$tmpdir"
+diff --git a/scripts/package/mkdebian b/scripts/package/mkdebian
+index 60a2a63a5..5920aaa6d 100755
+--- a/scripts/package/mkdebian
++++ b/scripts/package/mkdebian
+@@ -98,7 +98,7 @@ sourcename=$KDEB_SOURCENAME
+ if [ "$ARCH" = "um" ] ; then
+ 	packagename=user-mode-linux
+ else
+-	packagename=linux-image
++	packagename=p4pi-linux-image
+ fi
+ 
+ debarch=
+@@ -184,9 +184,9 @@ Description: Linux kernel, version $version
+  This package contains the Linux kernel, modules and corresponding other
+  files, version: $version.
+ 
+-Package: linux-libc-dev
++Package: p4pi-linux-libc-dev
+ Section: devel
+-Provides: linux-kernel-headers
++Provides: p4pi-linux-kernel-headers
+ Architecture: $debarch
+ Description: Linux support headers for userspace development
+  This package provides userspaces headers from the Linux kernel.  These headers
+@@ -197,7 +197,7 @@ EOF
+ if is_enabled CONFIG_MODULES; then
+ cat <<EOF >> debian/control
+ 
+-Package: linux-headers-$version
++Package: p4pi-linux-headers-$version
+ Architecture: $debarch
+ Description: Linux kernel headers for $version on $debarch
+  This package provides kernel header files for $version on $debarch
+@@ -209,7 +209,7 @@ fi
+ if is_enabled CONFIG_DEBUG_INFO; then
+ cat <<EOF >> debian/control
+ 
+-Package: linux-image-$version-dbg
++Package: p4pi-linux-image-$version-dbg
+ Section: debug
+ Architecture: $debarch
+ Description: Linux kernel debugging symbols for $version

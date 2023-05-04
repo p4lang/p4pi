@@ -1,0 +1,14 @@
+[Unit]
+Description=BMv2 Switch
+After=p4pi-setup.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bmv2-start
+WorkingDirectory=/root/bmv2
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+

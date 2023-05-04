@@ -1,0 +1,23 @@
+#!/bin/bash
+
+export P4PI=/root/t4p4s/third_party/PI
+export GRPCPP=/root/t4p4s/third_party/P4Runtime_GRPCPP
+export GRPC=/root/t4p4s/third_party/grpc
+
+BM2_WDIR=/root/bmv2
+P4_PROG=l2switch
+T4P4S_PROG_FILE=/root/t4p4s-switch
+if [ -f "${T4P4S_PROG_FILE}" ]; then
+    P4_PROG=$(cat "${T4P4S_PROG_FILE}")
+else
+    echo "${P4_PROG}" > "${T4P4S_PROG_FILE}"
+fi
+
+rm -rf ${BM2_WDIR}/bin
+mkdir ${BM2_WDIR}/bin
+echo "Compiling P4 code"
+p4c-bm2-ss -I /usr/share/p4c/p4include --std p4-16 --p4runtime-files ${BM2_WDIR}/bin/${P4_PROG}.p4info.txt -o ${BM2_WDIR}/bin/${P4_PROG}.json ${BM2_WDIR}/examples/${P4_PROG}/${P4_PROG}.p4
+
+echo "Launching BMv2 switch"
+sudo simple_switch_grpc -i 0@veth0 -i 1@veth1 ${BM2_WDIR}/bin/${P4_PROG}.json -- --grpc-server-addr 127.0.0.1:50051
+

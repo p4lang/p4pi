@@ -1,0 +1,30 @@
+build_tag:
+  steps:
+    - trigger_services:
+        project: "home:p4pi:unstable"
+        package: "p4pi-examples"
+    - trigger_services:
+        project: "home:p4pi:unstable"
+        package: "p4pi-web"
+    - trigger_services:
+        project: "home:p4pi"
+        package: "p4pi-examples"
+    - trigger_services:
+        project: "home:p4pi"
+        package: "p4pi-web"
+  filters:
+    event: tag_push
+
+build_unstable:
+  steps:
+    - trigger_services:
+        project: "home:p4pi:unstable"
+        package: "p4pi-examples"
+    - trigger_services:
+        project: "home:p4pi:unstable"
+        package: "p4pi-web"
+  filters:
+    event: push
+    branches:
+      only:
+        - main
