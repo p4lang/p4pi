@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'image-specs/**'
+      - 'pi-gen/**'
       - '.github/workflows/on-push.yml'
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       defaults:
         run:
           shell: bash
-          working-directory: image-specs
+          working-directory: pi-gen
 
       steps:
       - uses: actions/checkout@v2
@@ -36,6 +36,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.IMAGE_NAME }}
-          path: image-specs/deploy/*.tar.xz
+          path: pi-gen/deploy/*.tar.xz
           if-no-files-found: error
           retention-days: 90
