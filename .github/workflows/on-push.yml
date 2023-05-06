@@ -37,6 +37,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.IMAGE_NAME }}
-          path: pi-gen/deploy/*.tar.xz
+          path: pi-gen/deploy/*.zip
           if-no-files-found: error
           retention-days: 90
