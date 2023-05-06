@@ -5,6 +5,7 @@ on:
       - master
     paths:
       - 'pi-gen/**'
+      - 'packages/**'
       - '.github/workflows/on-push.yml'
 
 jobs:
@@ -16,7 +17,7 @@ jobs:
           working-directory: pi-gen
 
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Register binfmt_misc entries
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -33,7 +34,7 @@ jobs:
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.IMAGE_NAME }}
           path: pi-gen/deploy/*.tar.xz
