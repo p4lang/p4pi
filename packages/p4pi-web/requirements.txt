@@ -15,7 +15,7 @@ django==3.2.25; python_version >= "3.6"
 dnspython==1.16.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
 eventlet==0.31.0
 greenlet==1.1.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
-gunicorn==20.1.0; python_version >= "3.5"
+gunicorn==22.0.0; python_version >= "3.5"
 h11==0.12.0; python_version >= "3.6" and python_full_version >= "3.6.1"
 hyperlink==21.0.0; python_full_version >= "3.6.7" and python_version >= "3.7"
 idna==3.7; python_full_version >= "3.6.7" and python_version >= "3.7"
