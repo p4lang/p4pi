@@ -27,7 +27,7 @@ pycountry = "^20.7.3"
 django-crispy-forms = "^1.12.0"
 python-socketio = "^4.6.1"
 python-engineio = "^3.13.0"
-eventlet = "0.30.0"
+eventlet = "0.35.2"
 psutil = "^5.9.0"
 
 [build-system]
