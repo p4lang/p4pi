@@ -11,7 +11,7 @@ cryptography==42.0.4; python_full_version >= "3.6.7" and python_version >= "3.7"
 daphne==3.0.2; python_version >= "3.6"
 django-crispy-forms==1.12.0; python_version >= "3.6"
 django-environ==0.4.5
-django==3.2.18; python_version >= "3.6"
+django==3.2.25; python_version >= "3.6"
 dnspython==1.16.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
 eventlet==0.31.0
 greenlet==1.1.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
