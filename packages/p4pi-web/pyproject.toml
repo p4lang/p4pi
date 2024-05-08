@@ -16,7 +16,7 @@ include = [
 
 [tool.poetry.dependencies]
 python = "~3.9"
-Django = "~=3.2.18"
+Django = "~=3.2.25"
 django-environ = "~=0.4.5"
 gunicorn = "^22.0.0"
 uvicorn = "^0.14.0"
