@@ -32,7 +32,7 @@ python-socketio==4.6.1
 pytz==2021.1; python_version >= "3.6"
 service-identity==21.1.0; python_full_version >= "3.6.7" and python_version >= "3.6"
 six==1.16.0; python_full_version >= "3.6.7" and python_version >= "3.6"
-sqlparse==0.4.4; python_version >= "3.6"
+sqlparse==0.5.0; python_version >= "3.6"
 twisted-iocpsupport==1.0.2; python_full_version >= "3.6.7" and python_version >= "3.6" and platform_system == "Windows"
 twisted==22.10.0rc1; python_full_version >= "3.6.7" and python_version >= "3.6"
 txaio==21.2.1; python_version >= "3.7"
