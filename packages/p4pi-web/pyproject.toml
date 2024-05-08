@@ -18,7 +18,7 @@ include = [
 python = "~3.9"
 Django = "~=3.2.18"
 django-environ = "~=0.4.5"
-gunicorn = "^20.1.0"
+gunicorn = "^22.0.0"
 uvicorn = "^0.14.0"
 wsproto = "^1.0.0"
 channels = "^3.0.4"
