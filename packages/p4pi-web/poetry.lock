@@ -328,19 +328,21 @@ idna = ["idna (>=2.1)"]
 
 [[package]]
 name = "eventlet"
-version = "0.30.0"
+version = "0.35.2"
 description = "Highly concurrent networking library"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "eventlet-0.30.0-py2.py3-none-any.whl", hash = "sha256:b33f31ae8d87eb2838dcb8467449211852374ee6dea97113c158fc84d9acff9b"},
-    {file = "eventlet-0.30.0.tar.gz", hash = "sha256:19d6f3aa9525221ba60d0ec31b570508021af7ad5497fb77f77501fe9a7c34d3"},
+    {file = "eventlet-0.35.2-py3-none-any.whl", hash = "sha256:8fc1ee60d583f1dd58d6f304bb95fd46d34865ab22f57cb99008a81d61d573db"},
+    {file = "eventlet-0.35.2.tar.gz", hash = "sha256:8d1263e20b7f816a046ac60e1d272f9e5bc503f7a34d9adc789f8a85b14fa57d"},
 ]
 
 [package.dependencies]
-dnspython = ">=1.15.0,<2.0.0"
-greenlet = ">=0.3"
-six = ">=1.10.0"
+dnspython = ">=1.15.0"
+greenlet = ">=1.0"
+
+[package.extras]
+dev = ["black", "build", "commitizen", "isort", "pip-tools", "pre-commit", "twine"]
 
 [[package]]
 name = "greenlet"
@@ -894,4 +896,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.9"
-content-hash = "1421afaaf523146b525a916656bbb39c7eac7cbc4055ed7e617953bed3836d39"
+content-hash = "bae08b13e7d46fd2380fef9c6bf84137137604f5c6291b0a834a3a2fc2a381dc"
