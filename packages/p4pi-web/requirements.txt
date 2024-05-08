@@ -7,7 +7,7 @@ channels==3.0.4; python_version >= "3.6"
 click==8.0.1; python_version >= "3.6"
 colorama==0.4.4; python_version >= "3.6" and python_full_version < "3.0.0" and platform_system == "Windows" or platform_system == "Windows" and python_version >= "3.6" and python_full_version >= "3.5.0"
 constantly==15.1.0; python_full_version >= "3.6.7" and python_version >= "3.6"
-cryptography==39.0.1; python_full_version >= "3.6.7" and python_version >= "3.7"
+cryptography==42.0.4; python_full_version >= "3.6.7" and python_version >= "3.7"
 daphne==3.0.2; python_version >= "3.6"
 django-crispy-forms==1.12.0; python_version >= "3.6"
 django-environ==0.4.5
