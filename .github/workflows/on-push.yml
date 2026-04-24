@@ -31,16 +31,18 @@ jobs:
 
       - name: Run build script (with retries)
         run: |
-          for attempt in 1 2 3; do
+          MAX_RETRIES=3
+          RETRY_DELAY_SECONDS=30
+          for attempt in $(seq 1 "$MAX_RETRIES"); do
             if sudo PIGEN_DOCKER_OPTS="-e DEPLOY_XZ=1" ./build-docker.sh; then
               exit 0
             fi
-            if [ "$attempt" -eq 3 ]; then
+            if [ "$attempt" -eq "$MAX_RETRIES" ]; then
               echo "Build failed after ${attempt} attempts."
               exit 1
             fi
-            echo "Build failed on attempt ${attempt}; retrying in 30s..."
-            sleep 30
+            echo "Build failed on attempt ${attempt}; retrying in ${RETRY_DELAY_SECONDS}s..."
+            sleep "$RETRY_DELAY_SECONDS"
           done
 
       - name: List deploy directory
