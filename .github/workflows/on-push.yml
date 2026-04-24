@@ -7,6 +7,13 @@ on:
       - 'pi-gen/**'
       - 'packages/**'
       - '.github/workflows/on-push.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'pi-gen/**'
+      - 'packages/**'
+      - '.github/workflows/on-push.yml'
 
 jobs:
     build:

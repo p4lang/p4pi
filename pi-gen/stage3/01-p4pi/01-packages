@@ -12,3 +12,4 @@ tmux
 bridge-utils
 iperf
 dpdk-kmods-dkms
+ninja-build
