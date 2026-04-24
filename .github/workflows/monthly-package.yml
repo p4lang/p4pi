@@ -3,7 +3,10 @@ name: Package image monthly
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 12 1 * *'
+    - cron: '0 0 1 * *'
+
+permissions:
+  contents: read
 
 jobs:
   package:
