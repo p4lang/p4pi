@@ -1,4 +1,4 @@
-name: Build image on push or PR
+name: Test image build on push or PR
 on:
   push:
     branches:
@@ -34,16 +34,3 @@ jobs:
 
       - name: List deploy directory
         run: ls -al deploy/
-
-      - name: Set image name
-        run: |
-          IMAGE_NAME="p4pi-$(date +'%Y-%m-%d')-$(git rev-parse --short=8 HEAD)"
-          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.IMAGE_NAME }}
-          path: pi-gen/deploy/*.zip
-          if-no-files-found: error
-          retention-days: 90
