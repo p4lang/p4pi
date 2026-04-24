@@ -120,3 +120,7 @@ If you cannot access P4Pi through the management IP, the following trick can hel
 
 - VLAN support
 - MAC learning control plane (P4Runtime shell cannot handle digests)
+
+## Troubleshooting
+
+If `t4p4s.sh` fails with `ninja: error: loading 'build.ninja'`, install Ninja (`sudo apt-get install -y ninja-build`) and retry the compilation.
