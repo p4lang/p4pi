@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 # Restore the real py3compile / py3clean that were replaced by a no-op stub
-# in stage2/00-qemu-py-compat to work around QEMU ARM64 Python segfaults.
-# Running this at the end of stage2 ensures the final image ships a fully
+# in stage1/00-qemu-py-compat to work around QEMU ARM64 Python segfaults.
+# Running this near the end of stage3 ensures the final image ships a fully
 # functional py3compile for users who install Python packages at runtime.
 
 restore_tool() {
