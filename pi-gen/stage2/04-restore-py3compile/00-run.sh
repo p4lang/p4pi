@@ -10,8 +10,12 @@ PY3CLEAN="${ROOTFS_DIR}/usr/bin/py3clean"
 
 if [ -f "${PY3COMPILE}.qemu-bak" ]; then
 	mv "${PY3COMPILE}.qemu-bak" "${PY3COMPILE}"
+else
+	echo "Warning: ${PY3COMPILE}.qemu-bak not found; py3compile stub may not have been created." >&2
 fi
 
 if [ -f "${PY3CLEAN}.qemu-bak" ]; then
 	mv "${PY3CLEAN}.qemu-bak" "${PY3CLEAN}"
+else
+	echo "Warning: ${PY3CLEAN}.qemu-bak not found; py3clean stub may not have been created." >&2
 fi

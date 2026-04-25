@@ -12,7 +12,7 @@
 PY3COMPILE="${ROOTFS_DIR}/usr/bin/py3compile"
 PY3CLEAN="${ROOTFS_DIR}/usr/bin/py3clean"
 
-if [ -f "${PY3COMPILE}" ]; then
+if [ -f "${PY3COMPILE}" ] && [ ! -f "${PY3COMPILE}.qemu-bak" ]; then
 	mv "${PY3COMPILE}" "${PY3COMPILE}.qemu-bak"
 	cat > "${PY3COMPILE}" << 'EOF'
 #!/bin/sh
@@ -22,7 +22,7 @@ EOF
 	chmod 755 "${PY3COMPILE}"
 fi
 
-if [ -f "${PY3CLEAN}" ]; then
+if [ -f "${PY3CLEAN}" ] && [ ! -f "${PY3CLEAN}.qemu-bak" ]; then
 	mv "${PY3CLEAN}" "${PY3CLEAN}.qemu-bak"
 	cat > "${PY3CLEAN}" << 'EOF'
 #!/bin/sh
