@@ -5,17 +5,14 @@
 # Running this at the end of stage2 ensures the final image ships a fully
 # functional py3compile for users who install Python packages at runtime.
 
-PY3COMPILE="${ROOTFS_DIR}/usr/bin/py3compile"
-PY3CLEAN="${ROOTFS_DIR}/usr/bin/py3clean"
+restore_tool() {
+	local TOOL_PATH="$1"
+	if [ -f "${TOOL_PATH}.qemu-bak" ]; then
+		mv "${TOOL_PATH}.qemu-bak" "${TOOL_PATH}"
+	else
+		echo "Warning: ${TOOL_PATH}.qemu-bak not found; stub may not have been created." >&2
+	fi
+}
 
-if [ -f "${PY3COMPILE}.qemu-bak" ]; then
-	mv "${PY3COMPILE}.qemu-bak" "${PY3COMPILE}"
-else
-	echo "Warning: ${PY3COMPILE}.qemu-bak not found; py3compile stub may not have been created." >&2
-fi
-
-if [ -f "${PY3CLEAN}.qemu-bak" ]; then
-	mv "${PY3CLEAN}.qemu-bak" "${PY3CLEAN}"
-else
-	echo "Warning: ${PY3CLEAN}.qemu-bak not found; py3clean stub may not have been created." >&2
-fi
+restore_tool "${ROOTFS_DIR}/usr/bin/py3compile"
+restore_tool "${ROOTFS_DIR}/usr/bin/py3clean"

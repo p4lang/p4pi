@@ -9,25 +9,18 @@
 # duration of stage2 package installs.  A companion script in the 04-restore-py3compile
 # substage restores the originals so the final image retains a working py3compile.
 
-PY3COMPILE="${ROOTFS_DIR}/usr/bin/py3compile"
-PY3CLEAN="${ROOTFS_DIR}/usr/bin/py3clean"
-
-if [ -f "${PY3COMPILE}" ] && [ ! -f "${PY3COMPILE}.qemu-bak" ]; then
-	mv "${PY3COMPILE}" "${PY3COMPILE}.qemu-bak"
-	cat > "${PY3COMPILE}" << 'EOF'
+stub_tool() {
+	local TOOL_PATH="$1"
+	if [ -f "${TOOL_PATH}" ] && [ ! -f "${TOOL_PATH}.qemu-bak" ]; then
+		mv "${TOOL_PATH}" "${TOOL_PATH}.qemu-bak"
+		cat > "${TOOL_PATH}" << 'EOF'
 #!/bin/sh
 # Temporarily replaced during QEMU ARM image build – restored by stage2/04-restore-py3compile
 exit 0
 EOF
-	chmod 755 "${PY3COMPILE}"
-fi
+		chmod 755 "${TOOL_PATH}"
+	fi
+}
 
-if [ -f "${PY3CLEAN}" ] && [ ! -f "${PY3CLEAN}.qemu-bak" ]; then
-	mv "${PY3CLEAN}" "${PY3CLEAN}.qemu-bak"
-	cat > "${PY3CLEAN}" << 'EOF'
-#!/bin/sh
-# Temporarily replaced during QEMU ARM image build – restored by stage2/04-restore-py3compile
-exit 0
-EOF
-	chmod 755 "${PY3CLEAN}"
-fi
+stub_tool "${ROOTFS_DIR}/usr/bin/py3compile"
+stub_tool "${ROOTFS_DIR}/usr/bin/py3clean"
