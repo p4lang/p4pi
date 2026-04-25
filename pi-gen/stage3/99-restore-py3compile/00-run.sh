@@ -8,7 +8,10 @@
 restore_tool() {
 	local TOOL_PATH="$1"
 	if [ -f "${TOOL_PATH}.qemu-bak" ]; then
-		mv "${TOOL_PATH}.qemu-bak" "${TOOL_PATH}"
+		mv "${TOOL_PATH}.qemu-bak" "${TOOL_PATH}" || {
+		echo "Error: Failed to restore ${TOOL_PATH}" >&2
+		return 1
+	}
 	else
 		echo "Warning: ${TOOL_PATH}.qemu-bak not found; stub may not have been created." >&2
 	fi

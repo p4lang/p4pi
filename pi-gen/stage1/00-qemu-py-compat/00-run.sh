@@ -13,7 +13,10 @@
 stub_tool() {
 	local TOOL_PATH="$1"
 	if [ -f "${TOOL_PATH}" ] && [ ! -f "${TOOL_PATH}.qemu-bak" ]; then
-		mv "${TOOL_PATH}" "${TOOL_PATH}.qemu-bak"
+		mv "${TOOL_PATH}" "${TOOL_PATH}.qemu-bak" || {
+		echo "Error: Failed to backup ${TOOL_PATH}" >&2
+		return 1
+	}
 		cat > "${TOOL_PATH}" << 'EOF'
 #!/bin/sh
 # Temporarily replaced during QEMU ARM image build – restored by stage3/99-restore-py3compile
