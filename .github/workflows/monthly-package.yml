@@ -1,29 +1,23 @@
-name: Test image build on push or PR
+name: Package image monthly
+
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'pi-gen/**'
-      - 'packages/**'
-      - '.github/workflows/on-push.yml'
-  pull_request:
-    branches:
-      - master
-    paths:
-      - 'pi-gen/**'
-      - 'packages/**'
-      - '.github/workflows/on-push.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 1 * *'
+
+permissions:
+  contents: read
 
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          shell: bash
-          working-directory: pi-gen
+  package:
+    if: ${{ github.repository == 'p4lang/p4pi' && github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: pi-gen
 
-      steps:
+    steps:
       - uses: actions/checkout@v4
 
       - name: Register binfmt_misc entries
@@ -47,3 +41,16 @@ jobs:
 
       - name: List deploy directory
         run: ls -al deploy/
+
+      - name: Set image name
+        run: |
+          IMAGE_NAME="p4pi-$(date +'%Y-%m-%d')-$(git rev-parse --short=8 HEAD)"
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.IMAGE_NAME }}
+          path: pi-gen/deploy/*.zip
+          if-no-files-found: error
+          retention-days: 90
