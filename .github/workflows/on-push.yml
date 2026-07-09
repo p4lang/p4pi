@@ -31,7 +31,7 @@ jobs:
 
       - name: Run build script (with retries)
         run: |
-          MAX_RETRIES=3
+          MAX_RETRIES=1
           RETRY_DELAY_SECONDS=30
           for attempt in $(seq 1 "$MAX_RETRIES"); do
             if sudo PIGEN_DOCKER_OPTS="-e DEPLOY_XZ=1" ./build-docker.sh; then
