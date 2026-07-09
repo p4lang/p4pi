@@ -22,6 +22,8 @@ jobs:
         run:
           shell: bash
           working-directory: pi-gen
+      env:
+        GIT_HASH: "${{ github.sha }}"
 
       steps:
       - uses: actions/checkout@v4

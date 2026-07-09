@@ -240,7 +240,8 @@ export KEYBOARD_LAYOUT="${KEYBOARD_LAYOUT:-English (UK)}"
 
 export TIMEZONE_DEFAULT="${TIMEZONE_DEFAULT:-Europe/London}"
 
-export GIT_HASH=${GIT_HASH:-"$(git rev-parse HEAD)"}
+: ${GITH_HASH:="$(git rev-parse HEAD)"}
+export GIT_HASH
 
 export PUBKEY_SSH_FIRST_USER
 

@@ -57,7 +57,7 @@ exit 1
 fi
 
 # Ensure the Git Hash is recorded before entering the docker container
-GIT_HASH=${GIT_HASH:-"$(git rev-parse HEAD)"}
+: ${GIT_HASH:="$(git rev-parse HEAD)"}
 
 CONTAINER_EXISTS=$(${DOCKER} ps -a --filter name="${CONTAINER_NAME}" -q)
 CONTAINER_RUNNING=$(${DOCKER} ps --filter name="${CONTAINER_NAME}" -q)

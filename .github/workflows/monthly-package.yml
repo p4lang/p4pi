@@ -44,7 +44,7 @@ jobs:
 
       - name: Set image name
         run: |
-          IMAGE_NAME="p4pi-$(date +'%Y-%m-%d')-$(git rev-parse --short=8 HEAD)"
+          IMAGE_NAME="p4pi-$(date +'%Y-%m-%d')-${GITHUB_SHA::8}"
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
       - name: Upload artifact
