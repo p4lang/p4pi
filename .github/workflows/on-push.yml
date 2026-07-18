@@ -1,6 +1,13 @@
-name: Build image on push or PR
+name: Test image build on push or PR
 on:
   push:
+    branches:
+      - master
+    paths:
+      - 'pi-gen/**'
+      - 'packages/**'
+      - '.github/workflows/on-push.yml'
+  pull_request:
     branches:
       - master
     paths:
@@ -15,6 +22,8 @@ jobs:
         run:
           shell: bash
           working-directory: pi-gen
+      env:
+        GIT_HASH: "${{ github.sha }}"
 
       steps:
       - uses: actions/checkout@v4
@@ -22,21 +31,21 @@ jobs:
       - name: Register binfmt_misc entries
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
-      - name: Run build script
-        run: sudo PIGEN_DOCKER_OPTS="-e DEPLOY_XZ=1" ./build-docker.sh
+      - name: Run build script (with retries)
+        run: |
+          MAX_RETRIES=1
+          RETRY_DELAY_SECONDS=30
+          for attempt in $(seq 1 "$MAX_RETRIES"); do
+            if sudo PIGEN_DOCKER_OPTS="-e DEPLOY_XZ=1" ./build-docker.sh; then
+              exit 0
+            fi
+            if [ "$attempt" -eq "$MAX_RETRIES" ]; then
+              echo "Build failed after ${attempt} attempts."
+              exit 1
+            fi
+            echo "Build failed on attempt ${attempt}; retrying in ${RETRY_DELAY_SECONDS}s..."
+            sleep "$RETRY_DELAY_SECONDS"
+          done
 
       - name: List deploy directory
         run: ls -al deploy/
-
-      - name: Set image name
-        run: |
-          IMAGE_NAME="p4pi-$(date +'%Y-%m-%d')-$(git rev-parse --short=8 HEAD)"
-          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.IMAGE_NAME }}
-          path: pi-gen/deploy/*.zip
-          if-no-files-found: error
-          retention-days: 90
