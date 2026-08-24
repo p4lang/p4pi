@@ -29,9 +29,6 @@ systemctl enable systemd-resolved.service
 # Create and setup interfaces on startup
 systemctl enable systemd-networkd.service
 systemctl enable p4pi-setup.service
-systemctl enable t4p4s.service
 
-# Enable web UI
-systemctl enable p4pi-web
 
 EOF

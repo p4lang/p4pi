@@ -14,7 +14,6 @@ dosfstools
 dphys-swapfile
 raspberrypi-sys-mods
 pi-bluetooth
-apt-listchanges
 usb-modeswitch
 libpam-chksshpwd
 rpi-update
@@ -33,4 +32,3 @@ raspinfo
 udisks2
 unzip zip p7zip-full
 file
-kms++-utils

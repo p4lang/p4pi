@@ -1,6 +1,4 @@
 #!/bin/bash -e
-
-on_chroot << EOF
-mv /boot/vmlinuz-5.15.84-v8-p4pi /boot/p4pi-kernel8.img
-echo "kernel=p4pi-kernel8.img" >> /boot/config.txt
-EOF
+# The custom P4Pi kernel packages were hosted on the home:p4pi OBS repository,
+# which no longer exists. Using the stock Raspberry Pi OS kernel instead.
+echo "Using stock Raspberry Pi OS kernel"
